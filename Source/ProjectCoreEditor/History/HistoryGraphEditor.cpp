@@ -175,7 +175,7 @@ void FHistoryGraphEditor::OnCommandPasteNodes()
     // CurrentElement->Modify();
     // EdGraph->Modify();
     
-    FVector2f PasteLocation = GraphEditor->GetPasteLocation2f();
+    auto PasteLocation = GraphEditor->GetPasteLocation();
     
     UEdGraph* TargetGraph = GraphEditor->GetCurrentGraph();
     if (!TargetGraph) return;

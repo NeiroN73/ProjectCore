@@ -23,7 +23,6 @@ public class ProjectCoreRuntime : ModuleRules
             {
                 "Slate",
                 "SlateCore",
-                "DlgSystem",
                 "MessageLog",
                 "UnrealEd"
             }
