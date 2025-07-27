@@ -57,7 +57,7 @@ public:
 	void InitializeCharacterHandler(ACharacterHandler* Handler);
 	void InitializeHandler(AActor* Actor);
 
-	virtual void Inject(TObjectPtr<UInstallerContainer> Container) override;
+	virtual void Inject(UInstallerContainer* Container) override;
 
 private:
 	UPROPERTY()

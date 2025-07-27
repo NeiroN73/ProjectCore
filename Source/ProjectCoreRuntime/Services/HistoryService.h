@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Base/Service.h"
-#include "ProjectCoreRuntime/Installer/Injectable.h"
+#include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
 #include "HistoryService.generated.h"
 
 class UPreloadsService;
@@ -20,7 +20,7 @@ public IInjectable
 	GENERATED_BODY()
 
 public:
-	virtual void Inject(TObjectPtr<UInstallerContainer> InContainer) override;
+	virtual void Inject(UInstallerContainer* InContainer) override;
 
 	void TryProgress();
 	void OnPreloadsLoaded();

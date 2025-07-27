@@ -8,9 +8,9 @@
 #include "ProjectCoreRuntime/History/Elements/RootHistoryElement.h"
 #include "ProjectCoreRuntime/History/Elements/HistoryElement.h"
 #include "ProjectCoreRuntime/History/Elements/ReturnHistoryElement.h"
-#include "ProjectCoreRuntime/Installer/InstallerContainer.h"
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 
-void UHistorySaveState::Inject(TObjectPtr<UInstallerContainer> Container)
+void UHistorySaveState::Inject(UInstallerContainer* Container)
 {
 	HistoryConfig = Container->Resolve<UHistoryConfig>();
 }

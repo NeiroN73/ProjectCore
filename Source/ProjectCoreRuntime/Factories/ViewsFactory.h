@@ -15,7 +15,7 @@ class PROJECTCORERUNTIME_API UViewsFactory : public UBaseFactory
 	GENERATED_BODY()
 
 public:
-	virtual void Inject(TObjectPtr<UInstallerContainer> Container) override;
+	virtual void Inject(UInstallerContainer* Container) override;
 	
 	void InitializeView(UUserWidget* Widget);
 	

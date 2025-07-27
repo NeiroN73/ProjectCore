@@ -6,10 +6,10 @@
 #include "AssetsLoader.h"
 #include "ScreensService.h"
 #include "ProjectCoreRuntime/Configs/Base/PreloadConfig.h"
-#include "ProjectCoreRuntime/Installer/InstallerContainer.h"
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 #include "ProjectCoreRuntime/UI/Loading/LoadingScreen.h"
 
-void UPreloadsService::Inject(TObjectPtr<UInstallerContainer> Container)
+void UPreloadsService::Inject(UInstallerContainer* Container)
 {
 	PreloadConfigs = Container->ResolveAllImplements<IPreloadConfig>();
 	

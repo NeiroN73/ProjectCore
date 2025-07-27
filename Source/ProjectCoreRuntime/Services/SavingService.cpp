@@ -4,11 +4,11 @@
 #include "SavingService.h"
 
 #include "Kismet/GameplayStatics.h"
-#include "ProjectCoreRuntime/Installer/InstallerContainer.h"
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 #include "ProjectCoreRuntime/SaveData/Base/DataSaveGame.h"
 #include "ProjectCoreRuntime/SaveStates/Base/SaveState.h"
 
-void USavingService::Inject(TObjectPtr<UInstallerContainer> Container)
+void USavingService::Inject(UInstallerContainer* Container)
 {
 	States = Container->ResolveAll<USaveState>();
 }
@@ -16,7 +16,7 @@ void USavingService::Inject(TObjectPtr<UInstallerContainer> Container)
 void USavingService::Initialize()
 {
 	//Save();
-	Load();
+	//Load();
 }
 
 void USavingService::Save()

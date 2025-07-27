@@ -5,8 +5,7 @@
 #include "CoreMinimal.h"
 #include "AssetsLoader.h"
 #include "Base/Service.h"
-#include "ProjectCoreRuntime/Installer/Initializable.h"
-#include "ProjectCoreRuntime/Installer/Injectable.h"
+#include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
 #include "PreloadsService.generated.h"
 
 class UScreensService;
@@ -26,7 +25,7 @@ public IInjectable
 	GENERATED_BODY()
 
 public:
-	virtual void Inject(TObjectPtr<UInstallerContainer> Container) override;
+	virtual void Inject(UInstallerContainer* Container) override;
 
 	void StartPreload(TSet<FName> InPreloadIds, FOnPreloadCompleted Callback);
 	void CompletePreload(const FOnPreloadCompleted& Callback);

@@ -6,7 +6,7 @@
 #include "Base/Service.h"
 #include "UObject/Object.h"
 #include "ProjectCoreRuntime/Installer/Initializable.h"
-#include "ProjectCoreRuntime/Installer/Injectable.h"
+#include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
 #include "SavingService.generated.h"
 
 class ISavable;
@@ -20,7 +20,7 @@ public IInjectable
 	GENERATED_BODY()
 
 public:
-	virtual void Inject(TObjectPtr<UInstallerContainer> Container) override;
+	virtual void Inject(UInstallerContainer* Container) override;
 	virtual void Initialize() override;
 
 	void Save();

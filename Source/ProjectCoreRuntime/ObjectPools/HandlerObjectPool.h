@@ -7,7 +7,7 @@
 #include "ProjectCoreRuntime/Factories/HandlersFactory.h"
 #include "UObject/Object.h"
 #include "ProjectCoreRuntime/Handlers/Base/PoolableHandler.h"
-#include "ProjectCoreRuntime/Installer/Injectable.h"
+#include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
 #include "HandlerObjectPool.generated.h"
 
 UCLASS()
@@ -54,7 +54,7 @@ public:
 
 	void Return(APoolableHandler* Handler);
 	void Release();
-	virtual void Inject(TObjectPtr<UInstallerContainer> Container) override;
+	virtual void Inject(UInstallerContainer* Container) override;
 
 private:
 	UPROPERTY()

@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
 #include "UObject/Object.h"
-#include "ProjectCoreRuntime/Installer/Injectable.h"
 #include "ProjectCoreRuntime/Installer/Worldable.h"
 #include "BaseFactory.generated.h"
 
@@ -23,7 +23,7 @@ public:
 	UPROPERTY()
 	TObjectPtr<UWorld> World;
 	
-	virtual void Inject(TObjectPtr<UInstallerContainer> Container) override;
+	virtual void Inject(UInstallerContainer* Container) override;
 	virtual void WorldChanged(UWorld* NewWorld) override;
 
 protected:

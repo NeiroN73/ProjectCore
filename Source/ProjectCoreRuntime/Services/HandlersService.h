@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Base/Service.h"
 #include "ProjectCoreRuntime/Handlers/Base/ActorHandler.h"
-#include "ProjectCoreRuntime/Installer/Injectable.h"
+#include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
 #include "HandlersService.generated.h"
 
 class ACharacterHandler;
@@ -23,7 +23,7 @@ public:
 	UPROPERTY()
 	TMap<FName, AActorHandler*> HandlersById;
 	
-	virtual void Inject(TObjectPtr<UInstallerContainer> Container) override;
+	virtual void Inject(UInstallerContainer* Container) override;
 	virtual void WorldChanged(UWorld* NewWorld) override;
 
 	template<typename TCharacterHandler = ACharacterHandler>

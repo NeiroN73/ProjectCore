@@ -6,9 +6,9 @@
 #include "ProjectCoreRuntime/Factories/HandlersFactory.h"
 #include "ProjectCoreRuntime/Handlers/CharacterHandler.h"
 #include "ProjectCoreRuntime/Handlers/Base/ActorHandler.h"
-#include "ProjectCoreRuntime/Installer/InstallerContainer.h"
+#include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
 
-void UHandlersService::Inject(TObjectPtr<UInstallerContainer> Container)
+void UHandlersService::Inject(UInstallerContainer* Container)
 {
 	HandlerFactory = Container->Resolve<UHandlersFactory>();
 	HandlerFactory->OnCharacterHandlerAdded.BindLambda([this](ACharacterHandler* CharacterHandler)

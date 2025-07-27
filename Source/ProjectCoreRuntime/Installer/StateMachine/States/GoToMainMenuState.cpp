@@ -3,7 +3,7 @@
 
 #include "GoToMainMenuState.h"
 
-#include "ProjectCoreRuntime/Installer/InstallerContainer.h"
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 #include "ProjectCoreRuntime/Installer/StateMachine/InstallerStateMachine.h"
 #include "ProjectCoreRuntime/Services/LevelsService.h"
 

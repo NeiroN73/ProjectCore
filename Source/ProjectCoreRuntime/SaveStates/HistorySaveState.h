@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Base/SaveState.h"
 #include "ProjectCoreRuntime/Installer/Initializable.h"
-#include "ProjectCoreRuntime/Installer/Injectable.h"
+#include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
 #include "HistorySaveState.generated.h"
 
 class UHistoryElement;
@@ -27,7 +27,7 @@ public:
 	
 	virtual void Read() override;
 	virtual void Write() override;
-	virtual void Inject(TObjectPtr<UInstallerContainer> Container) override;
+	virtual void Inject(UInstallerContainer* Container) override;
 	virtual void Initialize() override;
 
 	void GatherElementsRecursive(const UBaseHistoryElement* ParentElement, TSet<UHistoryElement*>& OutElements);

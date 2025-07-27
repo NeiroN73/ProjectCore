@@ -17,7 +17,7 @@ void UScreensService::Close()
 	}
 }
 
-void UScreensService::Inject(TObjectPtr<UInstallerContainer> Container)
+void UScreensService::Inject(UInstallerContainer* Container)
 {
 	ViewFactory = Container->Resolve<UScreensFactory>();
 }

@@ -8,10 +8,10 @@
 #include "ProjectCoreRuntime/History/Actions/Base/HistoryAction.h"
 #include "ProjectCoreRuntime/History/Base/Preloadable.h"
 #include "ProjectCoreRuntime/History/Elements/HistoryElement.h"
-#include "ProjectCoreRuntime/Installer/InstallerContainer.h"
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 #include "ProjectCoreRuntime/SaveStates/HistorySaveState.h"
 
-void UHistoryService::Inject(TObjectPtr<UInstallerContainer> InContainer)
+void UHistoryService::Inject(UInstallerContainer* InContainer)
 {
 	Container = InContainer;
 

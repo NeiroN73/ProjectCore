@@ -6,7 +6,7 @@
 #include "ScreensService.h"
 #include "Base/Service.h"
 #include "ProjectCoreRuntime/Configs/LevelsConfig.h"
-#include "ProjectCoreRuntime/Installer/Injectable.h"
+#include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
 #include "LevelsService.generated.h"
 
 UCLASS()
@@ -17,7 +17,7 @@ public IInjectable
 
 public:
 	void LoadLevelAsync(TSoftObjectPtr<UWorld> Level, FStreamableDelegate Callback);
-	virtual void Inject(TObjectPtr<UInstallerContainer> Container) override;
+	virtual void Inject(UInstallerContainer* Container) override;
 	TObjectPtr<ULevelsConfig> GetLevelsConfig();
 
 private:

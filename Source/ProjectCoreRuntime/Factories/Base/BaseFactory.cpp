@@ -3,13 +3,14 @@
 
 #include "BaseFactory.h"
 
+#include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 #include "ProjectCoreRuntime/Installer/Initializable.h"
-#include "ProjectCoreRuntime/Installer/InstallerContainer.h"
 #include "ProjectCoreRuntime/Services/TickService.h"
 #include "ProjectCoreRuntime/Services/Base/Fragmentable.h"
 #include "ProjectCoreRuntime/Services/Base/Tickable.h"
 
-void UBaseFactory::Inject(TObjectPtr<UInstallerContainer> Container)
+void UBaseFactory::Inject(UInstallerContainer* Container)
 {
 	InstallerContainer = Container;
 

@@ -7,6 +7,7 @@
 #include "ProjectCoreRuntime/GameModes/Base/InstallerGameMode.h"
 #include "InstallerStateMachine.generated.h"
 
+class UInstallerScope;
 class UAssetsService;
 struct FStreamableHandle;
 class UInstallerContainer;
@@ -18,6 +19,8 @@ class PROJECTCORERUNTIME_API UInstallerStateMachine : public UObject
 	GENERATED_BODY()
 
 public:
+	UPROPERTY()
+	TArray<TObjectPtr<UInstallerScope>> InstallerScopes;
 	UPROPERTY()
 	TObjectPtr<UInstallerContainer> InstallerContainer;
 	UPROPERTY()

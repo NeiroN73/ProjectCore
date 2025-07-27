@@ -18,7 +18,7 @@ void ULevelsService::LoadLevelAsync(TSoftObjectPtr<UWorld> Level, FStreamableDel
 	}));
 }
 
-void ULevelsService::Inject(TObjectPtr<UInstallerContainer> Container)
+void ULevelsService::Inject(UInstallerContainer* Container)
 {
 	ViewsService = Container->Resolve<UScreensService>();
 	LevelsConfig = Container->Resolve<ULevelsConfig>();

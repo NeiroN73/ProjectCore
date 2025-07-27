@@ -7,7 +7,6 @@
 #include "Blueprint/UserWidget.h"
 #include "UObject/Object.h"
 #include "ProjectCoreRuntime/Configs/ScreensConfig.h"
-#include "ProjectCoreRuntime/Installer/InstallerContainer.h"
 #include "ProjectCoreRuntime/Services/AssetsLoader.h"
 #include "ProjectCoreRuntime/UI/Base/Screen.h"
 #include "ScreensFactory.generated.h"
@@ -26,7 +25,7 @@ private:
 	TObjectPtr<UViewModelsFactory> ViewModelFactory;
 	
 public:
-	virtual void Inject(TObjectPtr<UInstallerContainer> Container) override;
+	virtual void Inject(UInstallerContainer* Container) override;
 	
 	template<class TScreen = UScreen>
 	TScreen* Create()

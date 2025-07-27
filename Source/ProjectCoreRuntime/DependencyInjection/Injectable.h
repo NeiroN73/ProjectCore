@@ -19,5 +19,5 @@ class PROJECTCORERUNTIME_API IInjectable
 	GENERATED_BODY()
 
 public:
-	virtual void Inject(TObjectPtr<UInstallerContainer> Container) = 0;
+	virtual void Inject(UInstallerContainer* Container) = 0;
 };

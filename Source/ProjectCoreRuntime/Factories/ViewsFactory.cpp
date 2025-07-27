@@ -4,10 +4,10 @@
 #include "ViewsFactory.h"
 
 #include "ViewModelsFactory.h"
-#include "ProjectCoreRuntime/Installer/InstallerContainer.h"
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 #include "ProjectCoreRuntime/UI/Base/View.h"
 
-void UViewsFactory::Inject(TObjectPtr<UInstallerContainer> Container)
+void UViewsFactory::Inject(UInstallerContainer* Container)
 {
 	Super::Inject(Container);
 	

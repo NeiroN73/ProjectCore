@@ -3,16 +3,16 @@
 
 #include "HandlersFactory.h"
 
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 #include "ProjectCoreRuntime/Handlers/CharacterHandler.h"
 #include "ProjectCoreRuntime/Handlers/Base/ActorHandler.h"
-#include "ProjectCoreRuntime/Installer/InstallerContainer.h"
 #include "ProjectCoreRuntime/TableConfigs/CharactersTableData.h"
 
 void UHandlersFactory::InitializeCharacterHandler(ACharacterHandler* Handler)
 {
-	auto Data = CharactersTableConfig->FindRow<FCharactersTableData>(Handler->Id, "");
-	Handler->Data = Data;
-	InitializeHandler(Handler);
+	//auto Data = CharactersTableConfig->FindRow<FCharactersTableData>(Handler->Id, "");
+	//Handler->Data = Data;
+	//InitializeHandler(Handler);
 
 	OnCharacterHandlerAdded.ExecuteIfBound(Handler);
 }
@@ -27,7 +27,7 @@ void UHandlersFactory::InitializeHandler(AActor* Actor)
 	}
 }
 
-void UHandlersFactory::Inject(TObjectPtr<UInstallerContainer> Container)
+void UHandlersFactory::Inject(UInstallerContainer* Container)
 {
 	Super::Inject(Container);
 	

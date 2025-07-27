@@ -4,8 +4,9 @@
 #include "ScreensFactory.h"
 
 #include "ViewModelsFactory.h"
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 
-void UScreensFactory::Inject(TObjectPtr<UInstallerContainer> Container)
+void UScreensFactory::Inject(UInstallerContainer* Container)
 {
 	Super::Inject(Container);
 

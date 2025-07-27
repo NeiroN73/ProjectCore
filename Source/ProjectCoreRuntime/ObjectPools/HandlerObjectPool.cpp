@@ -3,7 +3,7 @@
 
 #include "HandlerObjectPool.h"
 
-#include "ProjectCoreRuntime/Installer/InstallerContainer.h"
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 
 void UHandlerObjectPool::Return(APoolableHandler* Handler)
 {
@@ -27,7 +27,7 @@ void UHandlerObjectPool::Release()
 	PoolContainer->Destroy();
 }
 
-void UHandlerObjectPool::Inject(TObjectPtr<UInstallerContainer> Container)
+void UHandlerObjectPool::Inject(UInstallerContainer* Container)
 {
 	HandlerFactory = Container->Resolve<UHandlersFactory>();
 }

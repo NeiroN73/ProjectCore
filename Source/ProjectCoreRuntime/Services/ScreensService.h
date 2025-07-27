@@ -33,7 +33,7 @@ public:
 	
 	void Close();
 	
-	virtual void Inject(TObjectPtr<UInstallerContainer> Container) override;
+	virtual void Inject(UInstallerContainer* Container) override;
 	
 	template<class TScreen = UScreen>
 	void Open(TSubclassOf<UScreen> InClass = TScreen::StaticClass())

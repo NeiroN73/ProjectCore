@@ -3,7 +3,7 @@
 
 #include "TickSystemsState.h"
 
-#include "ProjectCoreRuntime/Installer/InstallerContainer.h"
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 #include "ProjectCoreRuntime/Installer/StateMachine/InstallerStateMachine.h"
 #include "ProjectCoreRuntime/Services/TickService.h"
 
