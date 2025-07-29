@@ -10,9 +10,9 @@
 
 void UHandlersFactory::InitializeCharacterHandler(ACharacterHandler* Handler)
 {
-	//auto Data = CharactersTableConfig->FindRow<FCharactersTableData>(Handler->Id, "");
-	//Handler->Data = Data;
-	//InitializeHandler(Handler);
+	auto Data = CharactersTableConfig->FindRow<FCharactersTableData>(Handler->Id, "");
+	Handler->Data = Data;
+	InitializeHandler(Handler);
 
 	OnCharacterHandlerAdded.ExecuteIfBound(Handler);
 }

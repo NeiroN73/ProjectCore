@@ -23,7 +23,7 @@ public:
 	FCustomId Id;
 	
 	AActorHandler();
-	virtual void BuildFragments(UFragmentsFactory* InFragmentsFactory) override;
+	virtual void BuildFragments() override;
 
 private:
 	virtual FName GetId() override;

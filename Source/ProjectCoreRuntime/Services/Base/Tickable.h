@@ -18,5 +18,5 @@ class PROJECTCORERUNTIME_API ITickable
 
 public:
 	UFUNCTION()
-	virtual void Tick(float DeltaSeconds) = 0;
+	virtual void OnTick(float DeltaSeconds) = 0;
 };

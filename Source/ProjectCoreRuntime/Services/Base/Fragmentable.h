@@ -18,5 +18,5 @@ class PROJECTCORERUNTIME_API IFragmentable
 	GENERATED_BODY()
 
 public:
-	virtual void BuildFragments(UFragmentsFactory* InFragmentsFactory) = 0;
+	virtual void BuildFragments() = 0;
 };

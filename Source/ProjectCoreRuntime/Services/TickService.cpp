@@ -4,13 +4,13 @@
 #include "TickService.h"
 
 
-void UTickService::Tick(float DeltaSeconds)
+void UTickService::OnTick(float DeltaSeconds)
 {
 	for (auto Tickable : Tickables)
 	{
 		if (Tickable)
 		{
-			Tickable->Tick(DeltaSeconds);
+			Tickable->OnTick(DeltaSeconds);
 		}
 		else
 		{

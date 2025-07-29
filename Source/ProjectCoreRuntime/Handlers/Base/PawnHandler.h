@@ -26,6 +26,6 @@ public:
 
 	APawnHandler();
 
-	virtual void BuildFragments(UFragmentsFactory* NewModuleFactory) override;
+	virtual void BuildFragments() override;
 	virtual FName GetId() override;
 };

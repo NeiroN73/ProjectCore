@@ -11,7 +11,7 @@ UCLASS()
 class PROJECTCORERUNTIME_API UInstallerContainer : public UObject
 {
 	GENERATED_BODY()
-
+	
 private:
 	UPROPERTY()
 	TMap<TObjectPtr<UClass>, TObjectPtr<UObject>> Registrations;

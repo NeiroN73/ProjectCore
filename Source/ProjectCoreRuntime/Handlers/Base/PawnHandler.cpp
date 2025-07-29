@@ -9,9 +9,8 @@ APawnHandler::APawnHandler()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-void APawnHandler::BuildFragments(UFragmentsFactory* NewModuleFactory)
+void APawnHandler::BuildFragments()
 {
-	InitializeFragmentable(NewModuleFactory);
 }
 
 FName APawnHandler::GetId()

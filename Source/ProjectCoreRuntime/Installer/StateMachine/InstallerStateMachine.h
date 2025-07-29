@@ -20,8 +20,6 @@ class PROJECTCORERUNTIME_API UInstallerStateMachine : public UObject
 
 public:
 	UPROPERTY()
-	TArray<TObjectPtr<UInstallerScope>> InstallerScopes;
-	UPROPERTY()
 	TObjectPtr<UInstallerContainer> InstallerContainer;
 	UPROPERTY()
 	TObjectPtr<UAssetsService> AssetsLoaderService;

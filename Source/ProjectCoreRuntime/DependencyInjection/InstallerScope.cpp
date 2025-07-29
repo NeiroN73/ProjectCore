@@ -3,6 +3,8 @@
 
 #include "InstallerScope.h"
 
+#include "InstallerContainer.h"
+
 void UInstallerScope::Configure(UInstallerContainer* InContainer)
 {
 	Container = InContainer;
@@ -11,4 +13,9 @@ void UInstallerScope::Configure(UInstallerContainer* InContainer)
 UInstallerContainer* UInstallerScope::GetContainer()
 {
 	return Container;
+}
+
+void UInstallerScope::Register(UObject* Object)
+{
+	Container->Register(Object);
 }

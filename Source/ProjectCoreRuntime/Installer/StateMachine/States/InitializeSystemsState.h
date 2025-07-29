@@ -7,12 +7,6 @@
 #include "UObject/Object.h"
 #include "InitializeSystemsState.generated.h"
 
-class UTickService;
-class IInitializable;
-class IInjectable;
-class ITickable;
-class IFragmentable;
-
 UCLASS()
 class PROJECTCORERUNTIME_API UInitializeSystemsState : public UInstallerState
 {
@@ -22,10 +16,5 @@ public:
 	virtual void Enter() override;
 
 private:
-	TArray<IInjectable*> Injectables;
-	TArray<IInitializable*> Initializables;
-	TArray<ITickable*> Tickables;
-	TArray<IFragmentable*> Fragmentables;
-	
 	void InitializeSystems();
 };

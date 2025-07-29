@@ -3,10 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InstallerContainer.h"
 #include "UObject/Object.h"
 #include "InstallerScope.generated.h"
-
-class UInstallerContainer;
 
 UCLASS()
 class PROJECTCORERUNTIME_API UInstallerScope : public UObject
@@ -20,4 +19,12 @@ public:
 protected:
 	UPROPERTY()
 	TObjectPtr<UInstallerContainer> Container;
+
+	void Register(UObject* Object);
+
+	template<typename T>
+	void Register()
+	{
+		Container->Register<T>();
+	}
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ProjectCoreRuntime/Fragments/Base/Fragment.h"
+#include "ProjectCoreRuntime/DependencyInjection/ServiceLocator.h"
 
 #define FRAGMENTABLE_BODY() \
 private: \
@@ -8,11 +9,6 @@ private: \
 	TObjectPtr<UFragmentsFactory> FragmentsFactory; \
 	UPROPERTY() \
 	TMap<TSubclassOf<UFragment>, TObjectPtr<UFragment>> Fragments; \
-	UFUNCTION() \
-	void InitializeFragmentable(UFragmentsFactory* InFragmentsFactory) \
-	{ \
-		FragmentsFactory = InFragmentsFactory;\
-	} \
 public: \
 	template<typename TFragment = UFragment> \
 	TFragment* GetFragment(TSubclassOf<TFragment> Class = TFragment::StaticClass()) \
@@ -37,7 +33,7 @@ public: \
 	{ \
 		if (!Fragments.Contains(Class) && FragmentsFactory) \
 		{ \
-	        auto Fragment = FragmentsFactory->Create<TFragment>(); \
+	        auto Fragment = FServiceLocator::Resolve<UFragmentsFactory>().Create<TFragment>(); \
 			Fragments.Add(Class, Fragment); \
 			return Fragment; \
 		} \

@@ -1,8 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "ProjectCoreInstallerScope.h"
+#include "CoreInstallerScope.h"
 
+#include "ServiceLocator.h"
 #include "ProjectCoreRuntime/Configs/Base/Configs.h"
 #include "ProjectCoreRuntime/Factories/HandlersFactory.h"
 #include "ProjectCoreRuntime/Factories/FragmentsFactory.h"
@@ -20,7 +21,7 @@
 #include "ProjectCoreRuntime/Services/PreloadsService.h"
 
 
-void UProjectCoreInstallerScope::Configure(UInstallerContainer* InContainer)
+void UCoreInstallerScope::Configure(UInstallerContainer* InContainer)
 {
 	Super::Configure(InContainer);
 	
@@ -33,7 +34,7 @@ void UProjectCoreInstallerScope::Configure(UInstallerContainer* InContainer)
 	RegisterServices();
 }
 
-void UProjectCoreInstallerScope::RegisterConfigs()
+void UCoreInstallerScope::RegisterConfigs()
 {
 	auto Configs = Cast<UConfigs>(StateMachine->LoadedConfigsHandler->GetLoadedAsset())->Configs;
 	for (const auto Config : Configs)
@@ -42,7 +43,7 @@ void UProjectCoreInstallerScope::RegisterConfigs()
 	}
 }
 
-void UProjectCoreInstallerScope::RegisterTableConfigs()
+void UCoreInstallerScope::RegisterTableConfigs()
 {
 	auto TableConfigs =
 		Cast<UConfigs>(StateMachine->LoadedConfigsHandler->GetLoadedAsset())->TableConfigs;
@@ -52,12 +53,12 @@ void UProjectCoreInstallerScope::RegisterTableConfigs()
 	}
 }
 
-void UProjectCoreInstallerScope::RegisterSaveStates()
+void UCoreInstallerScope::RegisterSaveStates()
 {
 	Register<UHistorySaveState>();
 }
 
-void UProjectCoreInstallerScope::RegisterFactories()
+void UCoreInstallerScope::RegisterFactories()
 {
 	Register<UViewModelsFactory>();
 	Register<UScreensFactory>();
@@ -67,7 +68,7 @@ void UProjectCoreInstallerScope::RegisterFactories()
 	Register<UViewsFactory>();
 }
 
-void UProjectCoreInstallerScope::RegisterServices()
+void UCoreInstallerScope::RegisterServices()
 {
 	Register(StateMachine->AssetsLoaderService);
 	
@@ -78,9 +79,4 @@ void UProjectCoreInstallerScope::RegisterServices()
 	Register<UHandlersService>();
 	Register<UHistoryService>();
 	Register<UPreloadsService>();
-}
-
-void UProjectCoreInstallerScope::Register(UObject* Object)
-{
-	Container->Register(Object);
 }

@@ -14,5 +14,5 @@ void UTickSystemsState::Enter()
 
 void UTickSystemsState::Tick(float DeltaSeconds)
 {
-	TickService->Tick(DeltaSeconds);
+	TickService->OnTick(DeltaSeconds);
 }

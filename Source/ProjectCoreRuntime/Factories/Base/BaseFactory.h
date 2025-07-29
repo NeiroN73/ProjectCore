@@ -38,6 +38,4 @@ private:
 	TObjectPtr<UInstallerContainer> InstallerContainer;
 	UPROPERTY()
 	TObjectPtr<UTickService> TickService;
-	UPROPERTY()
-	TObjectPtr<UFragmentsFactory> FragmentsFactory;
 };

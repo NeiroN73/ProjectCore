@@ -5,12 +5,12 @@
 #include "CoreMinimal.h"
 #include "InstallerContainer.h"
 #include "InstallerScope.h"
-#include "ProjectCoreInstallerScope.generated.h"
+#include "CoreInstallerScope.generated.h"
 
 class UInstallerStateMachine;
 
 UCLASS()
-class PROJECTCORERUNTIME_API UProjectCoreInstallerScope : public UInstallerScope
+class PROJECTCORERUNTIME_API UCoreInstallerScope : public UInstallerScope
 {
 	GENERATED_BODY()
 
@@ -26,12 +26,4 @@ private:
 	void RegisterTableConfigs();
 	void RegisterServices();
 	void RegisterFactories();
-	
-	void Register(UObject* Object);
-	
-	template<typename T>
-	void Register()
-	{
-		Container->Register<T>();
-	}
 };

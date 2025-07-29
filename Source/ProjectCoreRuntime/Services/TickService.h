@@ -16,7 +16,7 @@ public ITickable
 	GENERATED_BODY()
 
 public:
-	virtual void Tick(float DeltaSeconds) override;
+	virtual void OnTick(float DeltaSeconds) override;
 
 	void RegisterTick(ITickable* Tickable);
 

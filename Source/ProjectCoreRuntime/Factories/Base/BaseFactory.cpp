@@ -15,7 +15,6 @@ void UBaseFactory::Inject(UInstallerContainer* Container)
 	InstallerContainer = Container;
 
 	TickService = Container->Resolve<UTickService>();
-	FragmentsFactory = Container->Resolve<UFragmentsFactory>();
 }
 
 void UBaseFactory::WorldChanged(UWorld* NewWorld)
@@ -59,6 +58,6 @@ void UBaseFactory::CastFragmentable(UObject* Object)
 {
 	if (auto Fragmentable = Cast<IFragmentable>(Object))
 	{
-		Fragmentable->BuildFragments(FragmentsFactory);
+		Fragmentable->BuildFragments();
 	}
 }
