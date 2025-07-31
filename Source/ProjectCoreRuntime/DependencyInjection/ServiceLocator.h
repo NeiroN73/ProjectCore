@@ -13,8 +13,8 @@ private:
 public:
 	static void SetContainer(UInstallerContainer* InContainer);
 	
-	template<typename T>
-	static T Resolve()
+	template<class T>
+	static T* Resolve()
 	{
 		if (Container.IsValid())
 		{

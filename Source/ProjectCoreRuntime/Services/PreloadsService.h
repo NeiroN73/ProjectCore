@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AssetsLoader.h"
+#include "AssetsService.h"
 #include "Base/Service.h"
 #include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
 #include "PreloadsService.generated.h"

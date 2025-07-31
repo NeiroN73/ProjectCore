@@ -3,8 +3,8 @@
 
 #include "CharacterFragment.h"
 
-void UCharacterFragment::Initialize(ACharacter* pCharacter, AController* pController)
+void UCharacterFragment::Initialize(ACharacterHandler* InCharacterHandler, AController* InController)
 {
-	Character = pCharacter;
-	Controller = pController;
+	Character = MakeWeakObjectPtr<ACharacterHandler>(InCharacterHandler);
+	Controller = MakeWeakObjectPtr<AController>(InController);
 }

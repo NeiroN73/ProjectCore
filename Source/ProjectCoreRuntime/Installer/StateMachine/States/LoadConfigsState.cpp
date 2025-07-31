@@ -4,7 +4,7 @@
 #include "LoadConfigsState.h"
 
 #include "ProjectCoreRuntime/Installer/StateMachine/InstallerStateMachine.h"
-#include "ProjectCoreRuntime/Services/AssetsLoader.h"
+#include "ProjectCoreRuntime/Services/AssetsService.h"
 
 void ULoadConfigsState::Enter()
 {

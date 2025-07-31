@@ -19,6 +19,7 @@
 #include "ProjectCoreRuntime/Services/ScreensService.h"
 #include "ProjectCoreRuntime/SaveStates/HistorySaveState.h"
 #include "ProjectCoreRuntime/Services/PreloadsService.h"
+#include "ProjectCoreRuntime/Services/TweensService.h"
 
 
 void UCoreInstallerScope::Configure(UInstallerContainer* InContainer)
@@ -79,4 +80,5 @@ void UCoreInstallerScope::RegisterServices()
 	Register<UHandlersService>();
 	Register<UHistoryService>();
 	Register<UPreloadsService>();
+	Register<UTweensService>();
 }

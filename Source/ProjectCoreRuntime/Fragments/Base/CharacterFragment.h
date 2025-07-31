@@ -6,17 +6,19 @@
 #include "Fragment.h"
 #include "CharacterFragment.generated.h"
 
+class ACharacterHandler;
+
 UCLASS(Abstract)
 class PROJECTCORERUNTIME_API UCharacterFragment : public UFragment
 {
 	GENERATED_BODY()
 
 public:
-	virtual void Initialize(ACharacter* pCharacter, AController* pController);
+	virtual void Initialize(ACharacterHandler* InCharacter, AController* InController);
 
 protected:
 	UPROPERTY()
-	TObjectPtr<ACharacter> Character;
+	TWeakObjectPtr<ACharacterHandler> Character;
 	UPROPERTY()
-	TObjectPtr<AController> Controller;
+	TWeakObjectPtr<AController> Controller;
 };

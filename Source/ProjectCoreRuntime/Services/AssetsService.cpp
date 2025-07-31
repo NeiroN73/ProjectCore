@@ -1,7 +1,7 @@
 // Copyright Floruit, Inc. All Rights Reserved.
 
 
-#include "AssetsLoader.h"
+#include "AssetsService.h"
 
 #include "Engine/AssetManager.h"
 #include "Engine/StreamableManager.h"

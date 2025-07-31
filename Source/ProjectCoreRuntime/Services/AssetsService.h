@@ -6,7 +6,7 @@
 #include "Engine/StreamableManager.h"
 #include "UObject/Object.h"
 #include "ProjectCoreRuntime/Services/Base/Service.h"
-#include "AssetsLoader.generated.h"
+#include "AssetsService.generated.h"
 
 struct FStreamableHandle;
 

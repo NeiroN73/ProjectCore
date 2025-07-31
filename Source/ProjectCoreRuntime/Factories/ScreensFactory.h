@@ -7,7 +7,7 @@
 #include "Blueprint/UserWidget.h"
 #include "UObject/Object.h"
 #include "ProjectCoreRuntime/Configs/ScreensConfig.h"
-#include "ProjectCoreRuntime/Services/AssetsLoader.h"
+#include "ProjectCoreRuntime/Services/AssetsService.h"
 #include "ProjectCoreRuntime/UI/Base/Screen.h"
 #include "ScreensFactory.generated.h"
 

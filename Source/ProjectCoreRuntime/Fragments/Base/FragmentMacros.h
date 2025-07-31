@@ -33,7 +33,7 @@ public: \
 	{ \
 		if (!Fragments.Contains(Class) && FragmentsFactory) \
 		{ \
-	        auto Fragment = FServiceLocator::Resolve<UFragmentsFactory>().Create<TFragment>(); \
+	        auto Fragment = FServiceLocator::Resolve<UFragmentsFactory>()->Create<TFragment>(); \
 			Fragments.Add(Class, Fragment); \
 			return Fragment; \
 		} \

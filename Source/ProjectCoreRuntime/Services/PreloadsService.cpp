@@ -3,7 +3,7 @@
 
 #include "PreloadsService.h"
 
-#include "AssetsLoader.h"
+#include "AssetsService.h"
 #include "ScreensService.h"
 #include "ProjectCoreRuntime/Configs/Base/PreloadConfig.h"
 #include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"

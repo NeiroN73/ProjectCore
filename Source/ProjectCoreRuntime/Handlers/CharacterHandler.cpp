@@ -13,3 +13,7 @@ FName ACharacterHandler::GetId()
 {
 	return Id;
 }
+
+void ACharacterHandler::BuildFragments()
+{
+}
