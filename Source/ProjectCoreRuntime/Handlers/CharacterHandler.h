@@ -8,7 +8,7 @@
 #include "ProjectCoreRuntime/Fragments/Base/FragmentMacros.h"
 #include "ProjectCoreRuntime/Handlers/Base/Handlerable.h"
 #include "ProjectCoreRuntime/Services/Base/Fragmentable.h"
-#include "ProjectCoreRuntime/TableConfigs/CharactersTableData.h"
+#include "ProjectCoreRuntime/TableConfigs/HandlersTableData.h"
 #include "CharacterHandler.generated.h"
 
 class AItemHandler;
@@ -25,7 +25,7 @@ public:
 	UPROPERTY(EditAnywhere, Category="Id")
 	FCustomId Id;
 	
-	FCharactersTableData* Data;
+	FHandlersTableData* Data;
 
 	ACharacterHandler();
 
@@ -33,6 +33,6 @@ private:
 	virtual FName GetId() override;
 
 public:
-	virtual void BuildFragments() override;
+	virtual void BuildFragments() override {}
 	virtual void SetItemInSlot(AItemHandler* ItemHandler) {}
 };

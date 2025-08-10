@@ -31,7 +31,7 @@ public: \
 	template<typename TFragment = UFragment> \
 	TFragment* TryAddFragment(TSubclassOf<TFragment> Class = TFragment::StaticClass()) \
 	{ \
-		if (!Fragments.Contains(Class) && FragmentsFactory) \
+		if (!Fragments.Contains(Class)) \
 		{ \
 	        auto Fragment = FServiceLocator::Resolve<UFragmentsFactory>()->Create<TFragment>(); \
 			Fragments.Add(Class, Fragment); \

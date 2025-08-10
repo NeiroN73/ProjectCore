@@ -19,7 +19,7 @@ public:
 	{
 		TViewModel* ViewModel = NewObject<TViewModel>();
 		CastInjectable(ViewModel);
-		CastModulable(ViewModel);
+		CastFragmentable(ViewModel);
 		CastTickable(ViewModel);
 		return ViewModel;
 	}

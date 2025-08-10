@@ -7,7 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "ProjectCoreRuntime/Handlers/Base/ActorHandler.h"
 #include "ProjectCoreRuntime/Services/HandlersService.h"
-#include "ProjectCoreRuntime/TableConfigs/CharactersTableData.h"
+#include "ProjectCoreRuntime/TableConfigs/HandlersTableData.h"
 #include "HandlersFactory.generated.h"
 
 class UHandlersConfig;
@@ -26,10 +26,10 @@ public:
 	FOnActorHandlerAdded OnActorHandlerAdded;
 	
 	template<class TActor = AActor>
-	TActor* SpawnHandler(FVector Location = FVector::ZeroVector, FRotator Rotation = FRotator::ZeroRotator,
-		TSubclassOf<AActor> Class = TActor::StaticClass())
+	TActor* SpawnHandler(FName Id = "", FVector Location = FVector::ZeroVector, FRotator Rotation = FRotator::ZeroRotator)
 	{
-		if (auto Handler = World->SpawnActor<TActor>(Class, Location, Rotation))
+		auto Data = HandlersTableConfig->FindRow<FHandlersTableData>(Id, "");
+		if (auto Handler = World->SpawnActor<TActor>(Data->Class, Location, Rotation))
 		{
 			InitializeHandler(Handler);
 			return Handler;
@@ -39,11 +39,10 @@ public:
 	}
 
 	template<class TCharacter = ACharacterHandler>
-	TCharacter* SpawnCharacterHandler(FName Id, FVector Location = FVector::ZeroVector,
+	TCharacter* SpawnCharacterHandler(FName Id = "", FVector Location = FVector::ZeroVector,
 		FRotator Rotation = FRotator::ZeroRotator)
 	{
-		auto Data = CharactersTableConfig->FindRow<FCharactersTableData>(Id, "");
-		auto Handler = SpawnHandler<TCharacter>(Location, Rotation, Data->Class);
+		auto Handler = SpawnHandler<TCharacter>(Id, Location, Rotation);
 		InitializeCharacterHandler(Handler);
 
 		if (auto PlayerController = UGameplayStatics::GetPlayerController(World, 0))
@@ -61,5 +60,5 @@ public:
 
 private:
 	UPROPERTY()
-	TObjectPtr<UDataTable> CharactersTableConfig;
+	TObjectPtr<UDataTable> HandlersTableConfig;
 };

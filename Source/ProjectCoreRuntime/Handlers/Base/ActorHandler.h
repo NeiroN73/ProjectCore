@@ -22,7 +22,6 @@ public:
 	UPROPERTY(EditAnywhere)
 	FCustomId Id;
 	
-	AActorHandler();
 	virtual void BuildFragments() override;
 
 private:

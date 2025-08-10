@@ -4,11 +4,6 @@
 #include "ActorHandler.h"
 
 
-AActorHandler::AActorHandler()
-{
-	PrimaryActorTick.bCanEverTick = false;
-}
-
 void AActorHandler::BuildFragments()
 {
 }
