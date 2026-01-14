@@ -12,5 +12,5 @@ class PROJECTCORERUNTIME_API ULoadingScreen : public UScreen
 	GENERATED_BODY()
 
 public:
-	virtual void BuildViewModel(UViewModelsFactory* ViewModelFactory) override {}
+	virtual void BuildViewModel(UViewModelsFactory* ViewModelFactory) override {} 
 };
