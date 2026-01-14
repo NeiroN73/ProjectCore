@@ -14,4 +14,6 @@ class PROJECTCORERUNTIME_API UScreen : public UUserWidget, public IView
 
 public:
 	virtual void BuildViewModel(UViewModelsFactory* ViewModelFactory) override {}
+	virtual void Open() {}
+	virtual void Close() {}
 };

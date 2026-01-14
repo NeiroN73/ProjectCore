@@ -5,6 +5,7 @@
 
 #include "Kismet/GameplayStatics.h"
 #include "ProjectCoreRuntime/Configs/LevelsConfig.h"
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 #include "ProjectCoreRuntime/UI/Loading/LoadingScreen.h"
 
 void ULevelsService::LoadLevelAsync(TSoftObjectPtr<UWorld> Level, FStreamableDelegate Callback)
@@ -27,5 +28,5 @@ void ULevelsService::Inject(UInstallerContainer* Container)
 
 TObjectPtr<ULevelsConfig> ULevelsService::GetLevelsConfig()
 {
-	return LevelsConfig;
+	return LevelsConfig.Get();
 }

@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "ProjectCoreRuntime/Installer/Worldable.h"
-#include "ProjectCoreRuntime/SaveStates/Base/SaveState.h"
 #include "Service.generated.h"
 
 class UInstallerContainer;

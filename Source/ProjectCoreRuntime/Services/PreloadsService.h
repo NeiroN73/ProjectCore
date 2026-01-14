@@ -33,9 +33,9 @@ public:
 
 private:
 	UPROPERTY()
-	TObjectPtr<UAssetsService> AssetsService;
+	TWeakObjectPtr<UAssetsService> AssetsService;
 	UPROPERTY()
-	TObjectPtr<UScreensService> ScreensService;
+	TWeakObjectPtr<UScreensService> ScreensService;
 	
 	TArray<IPreloadConfig*> PreloadConfigs;
 	

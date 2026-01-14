@@ -21,9 +21,10 @@ private:
 	UPROPERTY()
 	TObjectPtr<UInstallerStateMachine> StateMachine;
 
-	void RegisterConfigs();
-	void RegisterSaveStates();
-	void RegisterTableConfigs();
-	void RegisterServices();
-	void RegisterFactories();
+public:
+	virtual void RegisterConfigs();
+	virtual void RegisterSaveStates();
+	virtual void RegisterTableConfigs();
+	virtual void RegisterServices();
+	virtual void RegisterFactories();
 };

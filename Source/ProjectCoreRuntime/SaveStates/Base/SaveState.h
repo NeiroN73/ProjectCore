@@ -14,7 +14,7 @@ class PROJECTCORERUNTIME_API USaveState : public UObject
 	
 public:
 	UPROPERTY()
-	UDataSaveGame* SaveGame;
+	TWeakObjectPtr<UDataSaveGame> SaveGame;
 	UPROPERTY()
 	bool bSaveDataInitialized;
 

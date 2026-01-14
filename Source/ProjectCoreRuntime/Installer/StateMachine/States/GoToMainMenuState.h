@@ -18,7 +18,7 @@ public:
 
 private:
 	UPROPERTY()
-	TObjectPtr<ULevelsService> LevelsService;
+	TWeakObjectPtr<ULevelsService> LevelsService;
 	UPROPERTY()
-	TObjectPtr<UAssetsService> AssetsLoaderService;
+	TWeakObjectPtr<UAssetsService> AssetsLoaderService;
 };

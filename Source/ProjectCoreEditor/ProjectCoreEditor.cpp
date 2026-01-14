@@ -24,11 +24,6 @@ void FProjectCoreEditorModule::StartupModule()
 		CreateStatic(&FCustomIdPropertyTypeCustomization::MakeInstance)
 	);
 
-	// PropertyModule.RegisterCustomClassLayout(
-	// 	UHistoryGraphNode::StaticClass()->GetFName(),
-	// 	FOnGetDetailCustomizationInstance::CreateStatic(&FHistoryDetailsCustomization::MakeInstance)
-	// );
-
 	PropertyModule.NotifyCustomizationModuleChanged();
 }
 

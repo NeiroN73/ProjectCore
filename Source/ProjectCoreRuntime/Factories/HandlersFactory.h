@@ -60,5 +60,5 @@ public:
 
 private:
 	UPROPERTY()
-	TObjectPtr<UDataTable> HandlersTableConfig;
+	TWeakObjectPtr<UDataTable> HandlersTableConfig;
 };

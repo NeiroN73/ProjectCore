@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Base/Config.h"
 #include "ProjectCoreRuntime/EditorUtils/CustomId.h"
-#include "ProjectCoreRuntime/Installer/Initializable.h"
 #include "HandlersConfig.generated.h"
 
 UCLASS()

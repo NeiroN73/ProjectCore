@@ -29,7 +29,6 @@ public:
 
 		auto Pool = NewObject<TObjectPool>(World);
 		CastInterfaces(Pool);
-		//Pool->Create(PoolsContainer, Size);
 		return Pool;
 	}
 

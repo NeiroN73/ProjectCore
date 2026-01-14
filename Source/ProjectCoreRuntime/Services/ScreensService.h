@@ -19,7 +19,7 @@ public IInjectable
 
 private:
 	UPROPERTY()
-	TObjectPtr<UScreensFactory> ViewFactory;
+	TWeakObjectPtr<UScreensFactory> ViewFactory;
 
 	UPROPERTY()
 	TMap<TSubclassOf<UScreen>, TObjectPtr<UScreen>> ScreensByClass;
@@ -55,7 +55,7 @@ public:
 		}
 
 		CurrentScreen->SetVisibility(ESlateVisibility::Visible);
-		//Screen->Open();
+		CurrentScreen->Open();
 	
 		ScreensStack.Push(CurrentScreen);
 	}

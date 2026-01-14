@@ -61,7 +61,7 @@ private:
 	TArray<TObjectPtr<APoolableHandler>> Pool;
 
 	UPROPERTY()
-	TObjectPtr<UHandlersFactory> HandlerFactory;
+	TWeakObjectPtr<UHandlersFactory> HandlerFactory;
 
 	UPROPERTY()
 	TObjectPtr<AActor> PoolContainer;

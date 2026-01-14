@@ -8,6 +8,7 @@
 #include "ProjectCoreRuntime/History/Conditions/Base/HistoryCondition.h"
 #include "ProjectCoreRuntime/History/Triggers/Base/HistoryTrigger.h"
 #include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 #include "ProjectCoreRuntime/Services/HistoryService.h"
 
 void UHistoryElement::Inject(UInstallerContainer* Container)

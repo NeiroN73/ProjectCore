@@ -17,5 +17,6 @@ public:
 	virtual void Enter() override;
 	virtual void Tick(float DeltaSeconds) override;
 
-	TObjectPtr<UTickService> TickService;
+	UPROPERTY()
+	TWeakObjectPtr<UTickService> TickService;
 };

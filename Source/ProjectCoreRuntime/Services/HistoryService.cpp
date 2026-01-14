@@ -61,7 +61,7 @@ void UHistoryService::OnPreloadsLoaded()
 				continue;
 			}
 
-			Element->Inject(Container);
+			Element->Inject(Container.Get());
 			Element->Initialize();
 		}
 	}

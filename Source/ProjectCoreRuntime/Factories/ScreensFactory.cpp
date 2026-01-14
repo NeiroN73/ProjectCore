@@ -19,6 +19,6 @@ void UScreensFactory::InitializeView(UUserWidget* Widget)
 {
 	if (auto View = Cast<IView>(Widget))
 	{
-		View->BuildViewModel(ViewModelFactory);
+		View->BuildViewModel(ViewModelFactory.Get());
 	}
 }

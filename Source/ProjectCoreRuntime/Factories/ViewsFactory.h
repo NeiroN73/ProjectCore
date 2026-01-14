@@ -33,5 +33,5 @@ public:
 
 private:
 	UPROPERTY()
-	TObjectPtr<UViewModelsFactory> ViewModelsFactory;
+	TWeakObjectPtr<UViewModelsFactory> ViewModelsFactory;
 };

@@ -2,7 +2,6 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
-#include "ProjectCoreRuntime/Factories/FragmentsFactory.h"
 #include "Fragmentable.generated.h"
 
 class UFragment;

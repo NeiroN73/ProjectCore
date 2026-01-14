@@ -53,5 +53,5 @@ private:
 	void AddActorHandler(AActorHandler* Handler);
 
 	UPROPERTY()
-	TObjectPtr<UHandlersFactory> HandlerFactory;
+	TWeakObjectPtr<UHandlersFactory> HandlerFactory;
 };

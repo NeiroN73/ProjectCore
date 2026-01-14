@@ -170,11 +170,6 @@ void FHistoryGraphEditor::OnCommandPasteNodes()
 {
     if (!GraphEditor.IsValid()) return;
 
-    // const FScopedTransaction Transaction(FGenericCommands::Get().Paste->GetDescription());
-    //
-    // CurrentElement->Modify();
-    // EdGraph->Modify();
-    
     auto PasteLocation = GraphEditor->GetPasteLocation();
     
     UEdGraph* TargetGraph = GraphEditor->GetCurrentGraph();

@@ -27,14 +27,13 @@ public:
 
 private:
 	UPROPERTY()
-	TObjectPtr<UHistorySaveState> HistorySaveState;
-
+	TWeakObjectPtr<UHistorySaveState> HistorySaveState;
 	UPROPERTY()
-	TObjectPtr<UInstallerContainer> Container;
+	TWeakObjectPtr<UInstallerContainer> Container;
 	UPROPERTY()
-	TObjectPtr<UHistoryConfig> HistoryConfig;
+	TWeakObjectPtr<UHistoryConfig> HistoryConfig;
 	UPROPERTY()
-	TObjectPtr<UPreloadsService> PreloadsService;
+	TWeakObjectPtr<UPreloadsService> PreloadsService;
 
 public:
 	FOnHistoryProgressed OnHistoryProgressed;

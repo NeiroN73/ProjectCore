@@ -22,11 +22,9 @@ public:
 
 private:
 	UPROPERTY()
-	TObjectPtr<UScreensService> ViewsService;
-
+	TWeakObjectPtr<UScreensService> ViewsService;
 	UPROPERTY()
-	TObjectPtr<ULevelsConfig> LevelsConfig;
-
+	TWeakObjectPtr<ULevelsConfig> LevelsConfig;
 	UPROPERTY()
-	TObjectPtr<UAssetsService> AssetsService;
+	TWeakObjectPtr<UAssetsService> AssetsService;
 }; 

@@ -18,11 +18,11 @@ class PROJECTCORERUNTIME_API UScreensFactory : public UBaseFactory
 
 private:
 	UPROPERTY()
-	TObjectPtr<UScreensConfig> ScreensConfig;
+	TWeakObjectPtr<UScreensConfig> ScreensConfig;
 	UPROPERTY()
-	TObjectPtr<UAssetsService> AssetsLoaderService;
+	TWeakObjectPtr<UAssetsService> AssetsLoaderService;
 	UPROPERTY()
-	TObjectPtr<UViewModelsFactory> ViewModelFactory;
+	TWeakObjectPtr<UViewModelsFactory> ViewModelFactory;
 	
 public:
 	virtual void Inject(UInstallerContainer* Container) override;

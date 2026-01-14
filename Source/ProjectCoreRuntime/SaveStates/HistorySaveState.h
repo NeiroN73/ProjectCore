@@ -36,5 +36,5 @@ public:
 
 private:
 	UPROPERTY()
-	TObjectPtr<UHistoryConfig> HistoryConfig;
+	TWeakObjectPtr<UHistoryConfig> HistoryConfig;
 };

@@ -10,6 +10,4 @@ UCLASS()
 class PROJECTCORERUNTIME_API UBaseObjectPool : public UObject
 {
 	GENERATED_BODY()
-
-public:
 };

@@ -2,6 +2,8 @@
 
 #pragma once
 
+//todo: возможно стоит переписать mvvm без макросов для более простого дебагинга и тестирования
+
 #define BIND_FROM_VIEW_MODEL(Type, Name, BinderType) \
 public: \
 	UPROPERTY() \

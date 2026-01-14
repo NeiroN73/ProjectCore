@@ -3,6 +3,8 @@
 
 #include "ScreensService.h"
 
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
+
 void UScreensService::Close()
 {
 	if (ScreensStack.Num() > 0)
@@ -12,7 +14,7 @@ void UScreensService::Close()
 		
 		if (auto View = Cast<UScreen>(ViewObject))
 		{
-			//View->Close();
+			View->Close();
 		}
 	}
 }

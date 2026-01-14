@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "ProjectCoreRuntime/EditorUtils/CustomId.h"
 #include "TableData.generated.h"
 
 USTRUCT()

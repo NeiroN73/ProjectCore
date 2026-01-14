@@ -2,6 +2,7 @@
 
 #include "ProjectCoreRuntime/Fragments/Base/Fragment.h"
 #include "ProjectCoreRuntime/DependencyInjection/ServiceLocator.h"
+#include "ProjectCoreRuntime/Factories/FragmentsFactory.h"
 
 #define FRAGMENTABLE_BODY() \
 private: \

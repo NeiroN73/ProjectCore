@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "CustomId.generated.h"
 
+//todo: переписать на GameplayTag
 USTRUCT()
 struct PROJECTCORERUNTIME_API FCustomId
 {
