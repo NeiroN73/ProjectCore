@@ -1,4 +1,4 @@
-// Copyright Floruit, Inc. All Rights Reserved.
+// Copyright Ilya Prokhorov, Inc. All Rights Reserved.
 
 
 #include "TextBinder.h"
