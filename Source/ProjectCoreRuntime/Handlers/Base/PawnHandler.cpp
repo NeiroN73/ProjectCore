@@ -9,10 +9,6 @@ APawnHandler::APawnHandler()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-void APawnHandler::BuildFragments()
-{
-}
-
 FName APawnHandler::GetId()
 {
 	return Id;

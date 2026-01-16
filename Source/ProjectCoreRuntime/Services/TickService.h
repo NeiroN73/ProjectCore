@@ -10,14 +10,12 @@
 class UFragmentsFactory;
 
 UCLASS()
-class PROJECTCORERUNTIME_API UTickService : public UService,
-public ITickable
+class PROJECTCORERUNTIME_API UTickService : public UService
 {
 	GENERATED_BODY()
 
 public:
-	virtual void OnTick(float DeltaSeconds) override;
-
+	void OnTick(float DeltaSeconds);
 	void RegisterTick(ITickable* Tickable);
 
 private:

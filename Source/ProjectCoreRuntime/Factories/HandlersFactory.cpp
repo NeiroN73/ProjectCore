@@ -10,16 +10,18 @@
 
 void UHandlersFactory::InitializeCharacterHandler(ACharacterHandler* Handler)
 {
-	auto Data = HandlersTableConfig->FindRow<FHandlersTableData>(Handler->Id, "");
-	Handler->Data = Data;
 	InitializeHandler(Handler);
 
-	OnCharacterHandlerAdded.ExecuteIfBound(Handler);
+	//OnCharacterHandlerAdded.Execute(Handler);
 }
 
 void UHandlersFactory::InitializeHandler(AActor* Actor)
 {
-	CastInterfaces(Actor);
+	GetAccessInjectable(Actor);
+	GetAccessFragmentable(Actor);
+	GetAccessPreInitializable(Actor);
+	GetAccessInitializable(Actor);
+	GetAccessTickable(Actor);
 
 	if (auto Handler = Cast<AActorHandler>(Actor))
 	{
@@ -31,5 +33,5 @@ void UHandlersFactory::Inject(UInstallerContainer* Container)
 {
 	Super::Inject(Container);
 	
-	HandlersTableConfig = Container->ResolveTableConfig<FHandlersTableData>();
+	HandlersConfig = Container->Resolve<UHandlersConfig>();
 }

@@ -3,15 +3,14 @@
 
 #include "LevelsService.h"
 
+#include "AssetsService.h"
 #include "Kismet/GameplayStatics.h"
 #include "ProjectCoreRuntime/Configs/LevelsConfig.h"
 #include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
-#include "ProjectCoreRuntime/UI/Loading/LoadingScreen.h"
 
 void ULevelsService::LoadLevelAsync(TSoftObjectPtr<UWorld> Level, FStreamableDelegate Callback)
 {
-	ViewsService->Open<ULoadingScreen>();
-	AssetsService->LoadAsync(Level->GetFName(), Level.ToSoftObjectPath(),
+	AssetsService->LoadAsync("Test", Level.ToSoftObjectPath(),
 		FStreamableDelegate::CreateLambda([this, Level, Callback]
 	{
 		Callback.Execute();
@@ -21,12 +20,11 @@ void ULevelsService::LoadLevelAsync(TSoftObjectPtr<UWorld> Level, FStreamableDel
 
 void ULevelsService::Inject(UInstallerContainer* Container)
 {
-	ViewsService = Container->Resolve<UScreensService>();
 	LevelsConfig = Container->Resolve<ULevelsConfig>();
 	AssetsService = Container->Resolve<UAssetsService>();
 }
 
-TObjectPtr<ULevelsConfig> ULevelsService::GetLevelsConfig()
+ULevelsConfig* ULevelsService::GetLevelsConfig()
 {
 	return LevelsConfig.Get();
 }

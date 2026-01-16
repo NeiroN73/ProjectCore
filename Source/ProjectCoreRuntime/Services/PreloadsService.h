@@ -12,7 +12,6 @@ class UScreensService;
 class UConfig;
 class IPreloadConfig;
 class UAssetsService;
-class UHistoryService;
 class IPreloadable;
 class UHistorySaveState;
 

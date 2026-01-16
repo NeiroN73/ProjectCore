@@ -84,6 +84,9 @@ void UHistorySaveState::GatherCurrentElementsRecursive(const UBaseHistoryElement
 
 void UHistorySaveState::UpdateCurrentElements()
 {
+	if (HistoryConfig == nullptr)
+		return;
+	
 	for (auto Element : CurrentElements)
 	{
 		Element->bInitialized = false;

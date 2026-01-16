@@ -8,8 +8,8 @@
 #include "ProjectCoreRuntime/Installer/Worldable.h"
 #include "BaseFactory.generated.h"
 
+class UFragmentsContainer;
 class UTickService;
-class UFragmentsFactory;
 class UInstallerContainer;
 
 UCLASS()
@@ -27,15 +27,18 @@ public:
 	virtual void WorldChanged(UWorld* NewWorld) override;
 
 protected:
-	void CastInterfaces(UObject* Object);
-	void CastInjectable(UObject* Object);
-	void CastInitializable(UObject* Object);
-	void CastTickable(UObject* Object);
-	void CastFragmentable(UObject* Object);
+	void GetAllAccesses(UObject* Object);
+	void GetAccessInjectable(UObject* Object);
+	void GetAccessPreInitializable(UObject* Object);
+	void GetAccessInitializable(UObject* Object);
+	void GetAccessTickable(UObject* Object);
+	void GetAccessFragmentable(UObject* Object);
 
 private:
 	UPROPERTY()
 	TObjectPtr<UInstallerContainer> InstallerContainer;
 	UPROPERTY()
 	TObjectPtr<UTickService> TickService;
+	UPROPERTY()
+	TArray<TObjectPtr<UFragmentsContainer>> FragmentsContainers; 
 };

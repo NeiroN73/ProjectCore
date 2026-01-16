@@ -4,8 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "InstallerContainer.h"
+#include "ProjectCoreRuntime/Factories/Base/BaseFactory.h"
 
-class PROJECTCORERUNTIME_API FServiceLocator
+class PROJECTCORERUNTIME_API FFactoriesLocator
 {
 private:
 	static TWeakObjectPtr<UInstallerContainer> Container;
@@ -13,7 +14,7 @@ private:
 public:
 	static void SetContainer(UInstallerContainer* InContainer);
 	
-	template<class T>
+	template<class T = UBaseFactory>
 	static T* Resolve()
 	{
 		if (Container.IsValid())

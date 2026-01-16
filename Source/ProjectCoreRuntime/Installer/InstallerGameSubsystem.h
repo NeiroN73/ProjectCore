@@ -14,4 +14,6 @@ class PROJECTCORERUNTIME_API UInstallerGameSubsystem : public UGameInstanceSubsy
 public:
 	UPROPERTY()
 	TObjectPtr<UInstallerStateMachine> StateMachine;
+	UPROPERTY()
+	TObjectPtr<UInstallerContainer> InstallerContainer;
 };

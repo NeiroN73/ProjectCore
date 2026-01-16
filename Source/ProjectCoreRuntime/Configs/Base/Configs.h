@@ -8,7 +8,7 @@
 class UConfig;
 
 UCLASS()
-class PROJECTCORERUNTIME_API UConfigs : public UPrimaryDataAsset
+class PROJECTCORERUNTIME_API UConfigs : public UDataAsset
 {
 	GENERATED_BODY()
 

@@ -9,10 +9,10 @@
 
 void UTickSystemsState::Enter()
 {
-	TickService = StateMachine->InstallerContainer->Resolve<UTickService>();
+	//TickService = StateMachine->InstallerContainer->Resolve<UTickService>();
 }
 
 void UTickSystemsState::Tick(float DeltaSeconds)
 {
-	TickService->OnTick(DeltaSeconds);
+	//TickService->OnTick(DeltaSeconds);
 }

@@ -15,11 +15,6 @@ void UInstallerStateMachine::Initialize(TArray<UInstallerState*> NewStates)
 	NextState();
 }
 
-void UInstallerStateMachine::Tick(float DeltaSeconds)
-{
-	CurrentState->Tick(DeltaSeconds);
-}
-
 void UInstallerStateMachine::NextState()
 {
 	if (States.Dequeue(CurrentState))

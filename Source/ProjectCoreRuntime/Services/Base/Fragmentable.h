@@ -4,6 +4,7 @@
 #include "UObject/Interface.h"
 #include "Fragmentable.generated.h"
 
+class UFragmentsContainer;
 class UFragment;
 
 UINTERFACE()
@@ -17,5 +18,5 @@ class PROJECTCORERUNTIME_API IFragmentable
 	GENERATED_BODY()
 
 public:
-	virtual void BuildFragments() = 0;
+	virtual void BuildFragments(UFragmentsContainer* FragmentsContainer) = 0;
 };

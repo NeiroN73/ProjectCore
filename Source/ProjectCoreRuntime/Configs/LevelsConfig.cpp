@@ -2,3 +2,8 @@
 
 
 #include "LevelsConfig.h"
+
+TSoftObjectPtr<UWorld> ULevelsConfig::GetLevel(ELevelNames InName)
+{
+	return LevelsByName.FindRef(InName);
+}

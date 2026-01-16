@@ -91,14 +91,18 @@ public:
 	{
 		TArray<TInterface*> ResultArray;
 		const UClass* InterfaceClass = TInterface::UClassType::StaticClass();
-		
-		for (const auto& [Class, Object] : Registrations)
+
+		if (Registrations.Num() > 0)
 		{
-			if (Object && Class && Class->ImplementsInterface(InterfaceClass))
+			for (const auto& [Class, Object] : Registrations)
 			{
-				ResultArray.Add(Cast<TInterface>(Object));
+				if (Object && Class && Class->ImplementsInterface(InterfaceClass))
+				{
+					ResultArray.Add(Cast<TInterface>(Object));
+				}
 			}
 		}
+		
 		return ResultArray;
 	}
 };

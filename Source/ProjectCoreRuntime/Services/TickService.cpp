@@ -21,8 +21,5 @@ void UTickService::OnTick(float DeltaSeconds)
 
 void UTickService::RegisterTick(ITickable* Tickable)
 {
-	if (Tickable != this)
-	{
-		Tickables.Add(Tickable);
-	}
+	Tickables.Add(Tickable);
 }

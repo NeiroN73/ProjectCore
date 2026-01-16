@@ -3,8 +3,6 @@
 
 #include "InstallerGameMode.h"
 
-#include "ProjectCoreRuntime/Installer/StateMachine/InstallerStateMachine.h"
-
 AInstallerGameMode::AInstallerGameMode()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -17,15 +15,5 @@ void AInstallerGameMode::BeginPlay()
 	if (auto CurrentWorld = GetWorld())
 	{
 		World = CurrentWorld;
-	}
-}
-
-void AInstallerGameMode::Tick(float DeltaSeconds)
-{
-	Super::Tick(DeltaSeconds);
-
-	if (StateMachine)
-	{
-		StateMachine->Tick(DeltaSeconds);
 	}
 }

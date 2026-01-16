@@ -9,17 +9,17 @@
 
 void UBeginWorldSystemsState::Enter()
 {
-	Container = StateMachine->InstallerContainer;
-	
-	Worldables = Container->ResolveAllImplements<IWorldable>();
-
-	if (auto World = GetWorld())
-	{
-		for (auto Worldable : Worldables)
-		{
-			Worldable->WorldChanged(World);
-		}
-	}
-
-	StateMachine->NextState();
+	// Container = StateMachine->InstallerContainer;
+	//
+	// Worldables = Container->ResolveAllImplements<IWorldable>();
+	//
+	// if (auto World = GetWorld())
+	// {
+	// 	for (auto Worldable : Worldables)
+	// 	{
+	// 		Worldable->WorldChanged(World);
+	// 	}
+	// }
+	//
+	// StateMachine->NextState();
 }

@@ -7,6 +7,13 @@
 #include "UObject/Object.h"
 #include "LevelsConfig.generated.h"
 
+UENUM()
+enum class ELevelNames : uint8
+{
+	Gameplay  UMETA(DisplayName = "Gameplay Level"),
+	EntryPoint UMETA(DisplayName = "Entry Point")
+};
+
 UCLASS()
 class PROJECTCORERUNTIME_API ULevelsConfig : public UConfig
 {
@@ -14,11 +21,7 @@ class PROJECTCORERUNTIME_API ULevelsConfig : public UConfig
 
 public:
 	UPROPERTY(EditAnywhere)
-	TSoftObjectPtr<UWorld> EntryPointLevel;
+	TMap<ELevelNames, TSoftObjectPtr<UWorld>> LevelsByName;
 
-	UPROPERTY(EditAnywhere)
-	TSoftObjectPtr<UWorld> MainMenuLevel;
-	
-	UPROPERTY(EditAnywhere)
-	TSoftObjectPtr<UWorld> GameplayLevel;
+	TSoftObjectPtr<UWorld> GetLevel(ELevelNames InName);
 };

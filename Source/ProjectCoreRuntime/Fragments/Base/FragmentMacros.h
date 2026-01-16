@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ProjectCoreRuntime/Fragments/Base/Fragment.h"
-#include "ProjectCoreRuntime/DependencyInjection/ServiceLocator.h"
+#include "ProjectCoreRuntime/DependencyInjection/FactoriesLocator.h"
 #include "ProjectCoreRuntime/Factories/FragmentsFactory.h"
 
 #define FRAGMENTABLE_BODY() \

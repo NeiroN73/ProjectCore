@@ -7,6 +7,8 @@
 #include "UObject/Object.h"
 #include "InstallerScope.generated.h"
 
+class UConfigs;
+
 UCLASS()
 class PROJECTCORERUNTIME_API UInstallerScope : public UObject
 {
@@ -19,6 +21,8 @@ public:
 protected:
 	UPROPERTY()
 	TObjectPtr<UInstallerContainer> Container;
+	UPROPERTY()
+	TWeakObjectPtr<UConfigs> Configs;
 
 	void Register(UObject* Object);
 
@@ -27,4 +31,13 @@ protected:
 	{
 		Container->Register<T>();
 	}
+	
+public:
+	virtual void RegisterConfigs() {}
+	virtual void RegisterSaveStates() {}
+	virtual void RegisterTableConfigs() {}
+	virtual void RegisterServices() {}
+	virtual void RegisterFactories() {}
+
+	void SetConfigs(UConfigs* InConfigs);
 };

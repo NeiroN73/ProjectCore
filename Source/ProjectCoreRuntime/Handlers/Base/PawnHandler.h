@@ -6,26 +6,26 @@
 #include "Handlerable.h"
 #include "GameFramework/Pawn.h"
 #include "ProjectCoreRuntime/EditorUtils/CustomId.h"
-#include "ProjectCoreRuntime/Fragments/Base/FragmentMacros.h"
 #include "ProjectCoreRuntime/Services/Base/Fragmentable.h"
 #include "PawnHandler.generated.h"
 
+class UFragmentsContainer;
 class UFragmentsFactory;
 
 UCLASS()
 class PROJECTCORERUNTIME_API APawnHandler : public APawn,
-public IHandlerable,
-public IFragmentable
+public IHandlerable
 {
 	GENERATED_BODY()
-	FRAGMENTABLE_BODY()
 
 public:
 	UPROPERTY(EditAnywhere, Category="Id")
 	FCustomId Id;
 
+	UPROPERTY()
+	TObjectPtr<UFragmentsContainer> FragmentsContainer;
+	
 	APawnHandler();
 
-	virtual void BuildFragments() override;
 	virtual FName GetId() override;
 };

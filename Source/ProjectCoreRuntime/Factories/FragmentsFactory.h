@@ -17,8 +17,6 @@ public:
 	TFragment* Create()
 	{
 		auto Fragment = NewObject<TFragment>(World);
-		CastInjectable(Fragment);
-		CastTickable(Fragment);
 		return Fragment;
 	}
 };

@@ -8,6 +8,12 @@
 void UInstallerScope::Configure(UInstallerContainer* InContainer)
 {
 	Container = InContainer;
+
+	RegisterConfigs();
+	RegisterTableConfigs();
+	RegisterFactories();
+	RegisterSaveStates();
+	RegisterServices();
 }
 
 UInstallerContainer* UInstallerScope::GetContainer()
@@ -18,4 +24,9 @@ UInstallerContainer* UInstallerScope::GetContainer()
 void UInstallerScope::Register(UObject* Object)
 {
 	Container->Register(Object);
+}
+
+void UInstallerScope::SetConfigs(UConfigs* InConfigs)
+{
+	Configs = InConfigs;
 }

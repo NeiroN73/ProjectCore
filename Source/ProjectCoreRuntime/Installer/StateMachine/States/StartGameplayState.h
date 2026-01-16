@@ -6,10 +6,10 @@
 #include "Base/InstallerState.h"
 #include "UObject/Object.h"
 #include "ProjectCoreRuntime/Services/LevelsService.h"
-#include "GoToMainMenuState.generated.h"
+#include "StartGameplayState.generated.h"
 
 UCLASS()
-class PROJECTCORERUNTIME_API UGoToMainMenuState : public UInstallerState
+class PROJECTCORERUNTIME_API UStartGameplayState : public UInstallerState
 {
 	GENERATED_BODY()
 

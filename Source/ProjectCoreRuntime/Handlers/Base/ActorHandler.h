@@ -7,22 +7,18 @@
 #include "GameFramework/Actor.h"
 #include "ProjectCoreRuntime/EditorUtils/CustomId.h"
 #include "ProjectCoreRuntime/Fragments/Base/FragmentMacros.h"
-#include "ProjectCoreRuntime/Services/Base/Fragmentable.h"
 #include "ActorHandler.generated.h"
 
 UCLASS()
 class PROJECTCORERUNTIME_API AActorHandler : public AActor,
-public IHandlerable,
-public IFragmentable
+public IHandlerable
 {
 	GENERATED_BODY()
-	FRAGMENTABLE_BODY()
 
 public:
 	UPROPERTY(EditAnywhere)
 	FCustomId Id;
-	
-	virtual void BuildFragments() override;
+
 
 private:
 	virtual FName GetId() override;

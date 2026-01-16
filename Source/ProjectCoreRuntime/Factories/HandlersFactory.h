@@ -5,9 +5,9 @@
 #include "CoreMinimal.h"
 #include "Base/BaseFactory.h"
 #include "Kismet/GameplayStatics.h"
+#include "ProjectCoreRuntime/Configs/HandlersConfig.h"
 #include "ProjectCoreRuntime/Handlers/Base/ActorHandler.h"
 #include "ProjectCoreRuntime/Services/HandlersService.h"
-#include "ProjectCoreRuntime/TableConfigs/HandlersTableData.h"
 #include "HandlersFactory.generated.h"
 
 class UHandlersConfig;
@@ -21,6 +21,10 @@ class PROJECTCORERUNTIME_API UHandlersFactory : public UBaseFactory
 {
 	GENERATED_BODY()
 
+private:
+	UPROPERTY()
+	TWeakObjectPtr<UHandlersConfig> HandlersConfig;
+	
 public:
 	FOnCharacterHandlerAdded OnCharacterHandlerAdded;
 	FOnActorHandlerAdded OnActorHandlerAdded;
@@ -28,11 +32,13 @@ public:
 	template<class TActor = AActor>
 	TActor* SpawnHandler(FName Id = "", FVector Location = FVector::ZeroVector, FRotator Rotation = FRotator::ZeroRotator)
 	{
-		auto Data = HandlersTableConfig->FindRow<FHandlersTableData>(Id, "");
-		if (auto Handler = World->SpawnActor<TActor>(Data->Class, Location, Rotation))
+		if (auto Class = HandlersConfig->HandlersById.Find(Id))
 		{
-			InitializeHandler(Handler);
-			return Handler;
+			if (auto Handler = World->SpawnActor<TActor>(*Class, Location, Rotation))
+			{
+				InitializeHandler(Handler);
+				return Handler;
+			}
 		}
 		
 		return nullptr;
@@ -57,8 +63,4 @@ public:
 	void InitializeHandler(AActor* Actor);
 
 	virtual void Inject(UInstallerContainer* Container) override;
-
-private:
-	UPROPERTY()
-	TWeakObjectPtr<UDataTable> HandlersTableConfig;
 };
