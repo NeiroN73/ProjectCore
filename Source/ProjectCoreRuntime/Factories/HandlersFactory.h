@@ -29,7 +29,7 @@ public:
 	FOnCharacterHandlerAdded OnCharacterHandlerAdded;
 	FOnActorHandlerAdded OnActorHandlerAdded;
 	
-	template<class TActor = AActor>
+	template<class TActor = AActorHandler>
 	TActor* SpawnHandler(FName Id = "", FVector Location = FVector::ZeroVector, FRotator Rotation = FRotator::ZeroRotator)
 	{
 		if (auto Class = HandlersConfig->HandlersById.Find(Id))
@@ -48,19 +48,20 @@ public:
 	TCharacter* SpawnCharacterHandler(FName Id = "", FVector Location = FVector::ZeroVector,
 		FRotator Rotation = FRotator::ZeroRotator)
 	{
-		auto Handler = SpawnHandler<TCharacter>(Id, Location, Rotation);
-		InitializeCharacterHandler(Handler);
-
-		if (auto PlayerController = UGameplayStatics::GetPlayerController(World, 0))
+		if (auto Class = HandlersConfig->HandlersById.Find(Id))
 		{
-			PlayerController->Possess(Handler);
+			if (auto Handler = World->SpawnActor<TCharacter>(*Class, Location, Rotation))
+			{
+				InitializeCharacterHandler(Handler);
+				return Handler;
+			}
 		}
 
-		return Handler;
+		return nullptr;
 	}
 
 	void InitializeCharacterHandler(ACharacterHandler* Handler);
-	void InitializeHandler(AActor* Actor);
+	void InitializeHandler(AActorHandler* Actor);
 
 	virtual void Inject(UInstallerContainer* Container) override;
 };

@@ -6,27 +6,33 @@
 #include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 #include "ProjectCoreRuntime/Handlers/CharacterHandler.h"
 #include "ProjectCoreRuntime/Handlers/Base/ActorHandler.h"
-#include "ProjectCoreRuntime/TableConfigs/HandlersTableData.h"
 
 void UHandlersFactory::InitializeCharacterHandler(ACharacterHandler* Handler)
 {
-	InitializeHandler(Handler);
+	ExecuteInjectable(Handler);
+
+	if (auto PlayerController = UGameplayStatics::GetPlayerController(World, 0))
+	{
+		PlayerController->Possess(Handler);
+	}
+	
+	ExecuteFragmentable(Handler);
+	ExecutePreInitializable(Handler);
+	ExecuteInitializable(Handler);
+	ExecuteTickable(Handler);
 
 	//OnCharacterHandlerAdded.Execute(Handler);
 }
 
-void UHandlersFactory::InitializeHandler(AActor* Actor)
+void UHandlersFactory::InitializeHandler(AActorHandler* InHandler)
 {
-	GetAccessInjectable(Actor);
-	GetAccessFragmentable(Actor);
-	GetAccessPreInitializable(Actor);
-	GetAccessInitializable(Actor);
-	GetAccessTickable(Actor);
+	ExecuteInjectable(InHandler);
+	ExecuteFragmentable(InHandler);
+	ExecutePreInitializable(InHandler);
+	ExecuteInitializable(InHandler);
+	ExecuteTickable(InHandler);
 
-	if (auto Handler = Cast<AActorHandler>(Actor))
-	{
-		OnActorHandlerAdded.ExecuteIfBound(Handler);
-	}
+	OnActorHandlerAdded.ExecuteIfBound(InHandler);
 }
 
 void UHandlersFactory::Inject(UInstallerContainer* Container)

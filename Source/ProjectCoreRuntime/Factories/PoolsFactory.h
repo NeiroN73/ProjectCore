@@ -28,7 +28,6 @@ public:
 		}
 
 		auto Pool = NewObject<TObjectPool>(World);
-		CastInterfaces(Pool);
 		return Pool;
 	}
 

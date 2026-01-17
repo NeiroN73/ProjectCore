@@ -18,7 +18,7 @@ public IInjectable
 	GENERATED_BODY()
 
 public:
-	void LoadLevelAsync(TSoftObjectPtr<UWorld> Level, FStreamableDelegate Callback);
+	void LoadLevelAsync(TSoftObjectPtr<UWorld> Level, FStreamableDelegate Callback = nullptr);
 	virtual void Inject(UInstallerContainer* Container) override;
 	ULevelsConfig* GetLevelsConfig();
 

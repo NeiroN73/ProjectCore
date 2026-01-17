@@ -32,13 +32,13 @@ void UHandlersService::WorldChanged(UWorld* NewWorld)
 	UGameplayStatics::GetAllActorsOfClass(World, AActor::StaticClass(), Actors);
 	for (AActor* Actor : Actors)
 	{
-		if (auto Character = Cast<ACharacterHandler>(Actor))
+		if (auto CharacterHandler = Cast<ACharacterHandler>(Actor))
 		{
-			HandlerFactory->InitializeCharacterHandler(Character);
+			HandlerFactory->InitializeCharacterHandler(CharacterHandler);
 		}
-		else if (Actor->Implements<UHandlerable>())
+		else if (auto ActorHandler = Cast<AActorHandler>(Actor))
 		{
-			HandlerFactory->InitializeHandler(Actor);
+			HandlerFactory->InitializeHandler(ActorHandler);
 		}
 	}
 }

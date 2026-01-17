@@ -17,6 +17,7 @@ void UBaseFactory::Inject(UInstallerContainer* Container)
 	InstallerContainer = Container;
 
 	TickService = Container->Resolve<UTickService>();
+    FragmentsFactory = Container->Resolve<UFragmentsFactory>();
 }
 
 void UBaseFactory::WorldChanged(UWorld* NewWorld)
@@ -24,61 +25,97 @@ void UBaseFactory::WorldChanged(UWorld* NewWorld)
 	World = NewWorld;
 }
 
-void UBaseFactory::GetAllAccesses(UObject* Object)
+void UBaseFactory::ExecuteInjectables(TArray<UObject*>& Injectables)
 {
-	GetAccessInjectable(Object);
-	GetAccessFragmentable(Object);
-	GetAccessPreInitializable(Object);
-	GetAccessInitializable(Object);
-	GetAccessTickable(Object);
+    for (auto Injectable : Injectables)
+    {
+        ExecuteInjectable(Injectable);
+    }
 }
 
-void UBaseFactory::GetAccessInjectable(UObject* Object)
+void UBaseFactory::ExecutePreInitializables(TArray<UObject*>& PreInitializables)
 {
-	if (auto Injectable = Cast<IInjectable>(Object))
-	{
-		Injectable->Inject(InstallerContainer);
-	}
+    for (auto PreInitializable : PreInitializables)
+    {
+        ExecutePreInitializable(PreInitializable);
+    }
 }
 
-void UBaseFactory::GetAccessPreInitializable(UObject* Object)
+void UBaseFactory::ExecuteInitializables(TArray<UObject*>& Initializables)
 {
-	if (auto PreInitializable = Cast<IPreInitializable>(Object))
-	{
-		PreInitializable->PreInitialize();
-	}
+    for (auto Initializable : Initializables)
+    {
+        ExecuteInitializable(Initializable);
+    }
 }
 
-void UBaseFactory::GetAccessInitializable(UObject* Object)
+void UBaseFactory::ExecuteTickables(TArray<UObject*>& Tickables)
 {
-	if (auto Initializable = Cast<IInitializable>(Object))
-	{
-		Initializable->Initialize();
-	}
+    for (auto Tickable : Tickables)
+    {
+        ExecuteTickable(Tickable);
+    }
 }
 
-void UBaseFactory::GetAccessTickable(UObject* Object)
+void UBaseFactory::ExecuteFragmentables(TArray<UObject*>& Fragmentables)
 {
-	if (auto Tickable = Cast<ITickable>(Object))
-	{
-		TickService->RegisterTick(Tickable);
-	}
+    for (auto Fragmentable : Fragmentables)
+    {
+        ExecuteFragmentable(Fragmentable);
+    }
 }
 
-void UBaseFactory::GetAccessFragmentable(UObject* Object)
+void UBaseFactory::ExecuteInjectable(UObject* Object)
 {
-	if (auto Fragmentable = Cast<IFragmentable>(Object))
-	{
-		auto FragmentsContainer = NewObject<UFragmentsContainer>();
-		FragmentsContainers.Add(FragmentsContainer);
-		Fragmentable->BuildFragments(FragmentsContainer);
-		auto Fragments = FragmentsContainer->GetFragments();
-		for (auto Fragment : Fragments)
-		{
-			GetAccessInjectable(Fragment);
-			GetAccessPreInitializable(Fragment);
-			GetAccessInitializable(Fragment);
-			GetAccessTickable(Fragment);
-		}
-	}
+    if (auto Injectable = Cast<IInjectable>(Object))
+    {
+        Injectable->Inject(InstallerContainer);
+    }
+}
+
+void UBaseFactory::ExecutePreInitializable(UObject* Object)
+{
+    if (auto PreInitializable = Cast<IPreInitializable>(Object))
+    {
+        PreInitializable->PreInitialize();
+    }
+}
+
+void UBaseFactory::ExecuteInitializable(UObject* Object)
+{
+    if (auto Initializable = Cast<IInitializable>(Object))
+    {
+        Initializable->Initialize();
+    }
+}
+
+void UBaseFactory::ExecuteTickable(UObject* Object)
+{
+    if (auto Tickable = Cast<ITickable>(Object))
+    {
+        TickService->RegisterTick(Tickable);
+    }
+}
+
+void UBaseFactory::ExecuteFragmentable(UObject* Object)
+{
+    if (auto Fragmentable = Cast<IFragmentable>(Object))
+    {
+        auto FragmentsContainer = NewObject<UFragmentsContainer>();
+        FragmentsContainers.Add(FragmentsContainer);
+        Fragmentable->BuildFragments(FragmentsContainer);
+        auto Fragments = FragmentsContainer->GetFragments();
+        
+        TArray<UObject*> ObjectFragments;
+        ObjectFragments.Reserve(Fragments.Num());
+        
+        for (auto Fragment : Fragments)
+        {
+            ObjectFragments.Add(Fragment);
+        }
+        ExecuteInjectables(ObjectFragments);
+        ExecutePreInitializables(ObjectFragments);
+        ExecuteInitializables(ObjectFragments);
+        ExecuteTickables(ObjectFragments);
+    }
 }
