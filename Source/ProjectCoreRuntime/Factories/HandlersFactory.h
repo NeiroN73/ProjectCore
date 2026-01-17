@@ -4,10 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Base/BaseFactory.h"
-#include "Kismet/GameplayStatics.h"
 #include "ProjectCoreRuntime/Configs/HandlersConfig.h"
+#include "ProjectCoreRuntime/Handlers/CharacterHandler.h"
 #include "ProjectCoreRuntime/Handlers/Base/ActorHandler.h"
-#include "ProjectCoreRuntime/Services/HandlersService.h"
 #include "HandlersFactory.generated.h"
 
 class UHandlersConfig;

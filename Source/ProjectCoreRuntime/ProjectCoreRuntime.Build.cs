@@ -14,7 +14,9 @@ public class ProjectCoreRuntime : ModuleRules
                 "Engine",
                 "EnhancedInput",
                 "UMG",
-                "InputCore"
+                "InputCore",
+                "Json",
+                "JsonUtilities"
             }
         );
 

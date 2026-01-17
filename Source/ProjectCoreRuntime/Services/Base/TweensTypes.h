@@ -188,10 +188,10 @@ struct FPhysicsTween : public FTweenBase
     }
 };
 
-template<typename TweenType>
+template<typename TTween>
 struct TTweenBuilder
 {
-    TTweenBuilder(TSharedPtr<TweenType> InTween) : Tween(InTween) {}
+    TTweenBuilder(TSharedPtr<TTween> InTween) : Tween(InTween) {}
     
     TTweenBuilder& SetEaseType(ETweenEaseType Type)
     {
@@ -215,7 +215,7 @@ struct TTweenBuilder
     FTweenHandle Build() { return Tween->Handle; }
 
 protected:
-    TSharedPtr<TweenType> Tween;
+    TSharedPtr<TTween> Tween;
 };
 
 struct FFloatTweenBuilder : public TTweenBuilder<FFloatTween>

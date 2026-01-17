@@ -3,6 +3,7 @@
 
 #include "HandlersFactory.h"
 
+#include "Kismet/GameplayStatics.h"
 #include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 #include "ProjectCoreRuntime/Handlers/CharacterHandler.h"
 #include "ProjectCoreRuntime/Handlers/Base/ActorHandler.h"

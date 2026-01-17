@@ -6,7 +6,6 @@
 #include "Handlerable.h"
 #include "GameFramework/Actor.h"
 #include "ProjectCoreRuntime/EditorUtils/CustomId.h"
-#include "ProjectCoreRuntime/Fragments/Base/FragmentMacros.h"
 #include "ActorHandler.generated.h"
 
 UCLASS()
@@ -18,7 +17,6 @@ public IHandlerable
 public:
 	UPROPERTY(EditAnywhere)
 	FCustomId Id;
-
 
 private:
 	virtual FName GetId() override;
