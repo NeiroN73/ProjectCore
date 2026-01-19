@@ -2,8 +2,3 @@
 
 
 #include "Config.h"
-
-void UConfig::WorldChanged(UWorld* InWorld)
-{
-	World = InWorld;
-}

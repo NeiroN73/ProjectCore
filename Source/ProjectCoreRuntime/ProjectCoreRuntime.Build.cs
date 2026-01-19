@@ -16,7 +16,8 @@ public class ProjectCoreRuntime : ModuleRules
                 "UMG",
                 "InputCore",
                 "Json",
-                "JsonUtilities"
+                "JsonUtilities",
+                "GameplayTags"
             }
         );
 

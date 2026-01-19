@@ -6,8 +6,13 @@
 #include "UObject/Object.h"
 #include "Fragment.generated.h"
 
+class UFragmentsContainer;
+
 UCLASS(Abstract)
 class PROJECTCORERUNTIME_API UFragment : public UObject
 {
 	GENERATED_BODY()
+
+public:
+	virtual void ProcessFragmentsFromContainer(UFragmentsContainer* InFragmentsContainer) {}
 };

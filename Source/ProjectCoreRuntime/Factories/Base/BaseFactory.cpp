@@ -111,8 +111,11 @@ void UBaseFactory::ExecuteFragmentable(UObject* Object)
         
         for (auto Fragment : Fragments)
         {
+            Fragment->ProcessFragmentsFromContainer(FragmentsContainer);
+            
             ObjectFragments.Add(Fragment);
         }
+        
         ExecuteInjectables(ObjectFragments);
         ExecutePreInitializables(ObjectFragments);
         ExecuteInitializables(ObjectFragments);

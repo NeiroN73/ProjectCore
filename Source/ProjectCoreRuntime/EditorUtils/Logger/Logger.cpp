@@ -10,8 +10,16 @@
 
 class FMessageLogModule;
 
-void FLogger::ShowMessage(const FString& Message)
+void FLogger::ShowMessage(const FString& Message, const FString& Function)
 {
+	FString Prefix;
+    
+	if (!Function.IsEmpty())
+	{
+		Prefix = FString::Printf(TEXT("[%s] "), *Function);
+	}
+    
+	FString FullMessage = Prefix + Message;
 	FMessageLogModule& MessageLogModule = FModuleManager::LoadModuleChecked<FMessageLogModule>("MessageLog");
     
 	if (!MessageLogModule.IsRegisteredLogListing("Errors"))
@@ -22,14 +30,7 @@ void FLogger::ShowMessage(const FString& Message)
 	}
     
 	TSharedPtr<IMessageLogListing> LogListing = MessageLogModule.GetLogListing("Errors");
-    
-	LogListing->AddMessage(
-		FTokenizedMessage::Create(
-			EMessageSeverity::Error,
-			FText::FromString(Message)
-		)
-	);
-    
+	LogListing->AddMessage(FTokenizedMessage::Create(EMessageSeverity::Error, FText::FromString(FullMessage)));
 	MessageLogModule.OpenMessageLog("Errors");
 }
 

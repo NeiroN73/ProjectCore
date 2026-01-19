@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "Handlerable.h"
 #include "GameFramework/Actor.h"
 #include "ProjectCoreRuntime/EditorUtils/CustomId.h"
@@ -17,6 +18,9 @@ public IHandlerable
 public:
 	UPROPERTY(EditAnywhere)
 	FCustomId Id;
+
+	UPROPERTY(EditAnywhere)
+	FGameplayTag Tag;
 
 private:
 	virtual FName GetId() override;

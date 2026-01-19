@@ -5,21 +5,16 @@ void UTweensService::OnTick(float DeltaSeconds)
     for (auto It = ActiveTweens.CreateIterator(); It; ++It)
     {
         auto& Tween = It->Value;
-        if (Tween->bIsRunning)
+        Tween->OnTick(DeltaSeconds);
+        if (Tween->IsComplete())
         {
-            Tween->OnTick(DeltaSeconds);
-            if (Tween->IsComplete())
-            {
-                if (Tween->CompleteCallback)
-                    Tween->CompleteCallback();
-                
-                It.RemoveCurrent();
-            }
+            Tween->CompleteCallback.ExecuteIfBound();
+            It.RemoveCurrent();
         }
     }
 }
 
-FFloatTweenBuilder UTweensService::CreateFloatTween(float From, float To, float Duration, TFunction<void(float)> UpdateCallback)
+FFloatTweenBuilder UTweensService::CreateFloatTween(float From, float To, float Duration, FSimpleDelegate UpdateCallback)
 {
     auto Tween = MakeShared<FFloatTween>();
     Tween->Handle.Guid = FGuid::NewGuid();
@@ -85,21 +80,16 @@ FActorScaleTweenBuilder UTweensService::CreateScaleTween(AActor* Actor, const FV
     return FActorScaleTweenBuilder(Tween);
 }
 
-FPhysicsTweenBuilder UTweensService::CreatePhysicsTween(UPrimitiveComponent* Component, const FVector& ToLocation, float Duration, float Force)
-{
-    auto Tween = MakeShared<FPhysicsTween>();
-    Tween->Handle.Guid = FGuid::NewGuid();
-    Tween->Component = Component;
-    Tween->StartLocation = Component ? Component->GetComponentLocation() : FVector::ZeroVector;
-    Tween->EndLocation = ToLocation;
-    Tween->Duration = Duration;
-    Tween->PhysicsForce = Force;
-    
-    ActiveTweens.Add(Tween->Handle.Guid, Tween);
-    return FPhysicsTweenBuilder(Tween);
-}
-
 void UTweensService::KillTween(const FTweenHandle& Handle)
 {
+    if (auto Tween = ActiveTweens.Find(Handle.Guid))
+    {
+        Tween->Get()->Reset();
+    }
     ActiveTweens.Remove(Handle.Guid);
+}
+
+bool UTweensService::IsTweening(const FTweenHandle& Handle)
+{
+    return ActiveTweens.Contains(Handle.Guid);
 }

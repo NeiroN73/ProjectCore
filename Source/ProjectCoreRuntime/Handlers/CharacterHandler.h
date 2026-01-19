@@ -9,8 +9,6 @@
 #include "ProjectCoreRuntime/TableConfigs/HandlersTableData.h"
 #include "CharacterHandler.generated.h"
 
-class AItemHandler;
-
 UCLASS(Abstract)
 class PROJECTCORERUNTIME_API ACharacterHandler : public ACharacter,
 public IHandlerable

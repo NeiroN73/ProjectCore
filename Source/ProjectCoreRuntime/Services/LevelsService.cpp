@@ -13,7 +13,10 @@ void ULevelsService::LoadLevelAsync(TSoftObjectPtr<UWorld> Level, FStreamableDel
 	AssetsService->LoadAsync("Test", Level.ToSoftObjectPath(),
 		FStreamableDelegate::CreateLambda([this, Level, Callback]
 	{
-		Callback.Execute();
+		if (Callback.IsBound())
+		{
+			Callback.Execute();
+		}
 		UGameplayStatics::OpenLevelBySoftObjectPtr(World, Level);
 	}));
 }

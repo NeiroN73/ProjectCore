@@ -5,7 +5,6 @@
 #include "Fragmentable.generated.h"
 
 class UFragmentsContainer;
-class UFragment;
 
 UINTERFACE()
 class UFragmentable : public UInterface

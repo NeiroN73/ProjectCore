@@ -7,13 +7,3 @@ AInstallerGameMode::AInstallerGameMode()
 {
 	PrimaryActorTick.bCanEverTick = true;
 }
-
-void AInstallerGameMode::BeginPlay()
-{
-	Super::BeginPlay();
-
-	if (auto CurrentWorld = GetWorld())
-	{
-		World = CurrentWorld;
-	}
-}

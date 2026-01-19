@@ -19,8 +19,6 @@ struct FTweenHandle
     GENERATED_BODY()
     
     FGuid Guid;
-    
-    bool IsValid() const { return Guid.IsValid(); }
 };
 
 USTRUCT()
@@ -35,8 +33,7 @@ struct FTweenBase
     float Duration = 0.f;
     ETweenEaseType EaseType = ETweenEaseType::Linear;
     TWeakObjectPtr<UCurveFloat> CustomCurve = nullptr;
-    TFunction<void()> CompleteCallback;
-    bool bIsRunning = true;
+    FSimpleDelegate CompleteCallback;
     
     virtual void OnTick(float DeltaTime) PURE_VIRTUAL(FTweenBase::OnTick)
     
@@ -49,10 +46,15 @@ struct FTweenBase
         return CurrentTime >= Duration;
     }
 
+    void Reset()
+    {
+        CurrentTime = Duration;
+    }
+
 protected:
     float GetEasedAlpha() const
     {
-        auto Alpha = Duration < 0 ? 1.0f : FMath::Clamp(CurrentTime / Duration, 0.f, 1.f);;
+        auto Alpha = Duration < 0 ? 1.0f : FMath::Clamp(CurrentTime / Duration, 0.f, 1.f);
         switch(EaseType)
         {
             case ETweenEaseType::EaseIn: return FMath::InterpEaseIn(0.f, 1.f, Alpha, 2.f);
@@ -71,12 +73,12 @@ struct FFloatTween : public FTweenBase
 
     float StartValue = 0.f;
     float EndValue = 0.f;
-    TFunction<void(float)> UpdateCallback;
+    FSimpleDelegate UpdateCallback;
 
     virtual void OnTick(float DeltaTime) override
     {
         CurrentTime += DeltaTime;
-        if (UpdateCallback) UpdateCallback(GetValue());
+        UpdateCallback.ExecuteIfBound();
     }
 
     float GetValue() const
@@ -206,7 +208,7 @@ struct TTweenBuilder
         return *this;
     }
     
-    TTweenBuilder& OnComplete(TFunction<void()> Callback)
+    TTweenBuilder& OnComplete(FSimpleDelegate Callback)
     {
         Tween->CompleteCallback = Callback;
         return *this;
@@ -247,15 +249,4 @@ struct FActorScaleTweenBuilder : public TTweenBuilder<FActorScaleTween>
 struct FActorTransformTweenBuilder : public TTweenBuilder<FActorTransformTween>
 {
     FActorTransformTweenBuilder(TSharedPtr<FActorTransformTween> InTween) : TTweenBuilder(InTween) {}
-};
-
-struct FPhysicsTweenBuilder : public TTweenBuilder<FPhysicsTween>
-{
-    FPhysicsTweenBuilder(TSharedPtr<FPhysicsTween> InTween) : TTweenBuilder(InTween) {}
-    
-    FPhysicsTweenBuilder& SetForce(float Force)
-    {
-        Tween->PhysicsForce = Force;
-        return *this;
-    }
 };
