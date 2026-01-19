@@ -9,7 +9,7 @@ ACharacterHandler::ACharacterHandler()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-FName ACharacterHandler::GetId()
+FGameplayTag ACharacterHandler::GetTag()
 {
-	return Id;
+	return Tag;
 }

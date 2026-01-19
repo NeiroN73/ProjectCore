@@ -2,15 +2,37 @@
 
 void UTweensService::OnTick(float DeltaSeconds)
 {
-    for (auto It = ActiveTweens.CreateIterator(); It; ++It)
+    TArray<FGuid> KeysToRemove;
+    TArray<FSimpleDelegate> CallbacksToExecute;
+    
+    for (auto& [Guid, Tween] : ActiveTweens)
     {
-        auto& Tween = It->Value;
-        Tween->OnTick(DeltaSeconds);
-        if (Tween->IsComplete())
+        if (Tween.IsValid() && Tween.Get()->IsValid())
         {
-            Tween->CompleteCallback.ExecuteIfBound();
-            It.RemoveCurrent();
+            Tween->OnTick(DeltaSeconds);
+            if (Tween->IsComplete())
+            {
+                if (Tween->CompleteCallback.IsBound())
+                {
+                    CallbacksToExecute.Add(Tween->CompleteCallback);
+                }
+                KeysToRemove.Add(Guid);
+            }
         }
+        else
+        {
+            KeysToRemove.Add(Guid);
+        }
+    }
+
+    for (auto& Callback : CallbacksToExecute)
+    {
+        Callback.ExecuteIfBound();
+    }
+
+    for (const FGuid& Key : KeysToRemove)
+    {
+        ActiveTweens.Remove(Key);
     }
 }
 
@@ -29,7 +51,7 @@ FFloatTweenBuilder UTweensService::CreateFloatTween(float From, float To, float 
 
 FActorMoveTweenBuilder UTweensService::CreateMoveTween(AActor* Actor, const FVector& ToLocation, float Duration)
 {
-    auto Tween = MakeShared<FActorMoveTween>();
+    auto Tween = MakeShared<FActorLocationTween>();
     Tween->Handle.Guid = FGuid::NewGuid();
     Tween->Actor = Actor;
     Tween->StartLocation = Actor ? Actor->GetActorLocation() : FVector::ZeroVector;
@@ -84,7 +106,7 @@ void UTweensService::KillTween(const FTweenHandle& Handle)
 {
     if (auto Tween = ActiveTweens.Find(Handle.Guid))
     {
-        Tween->Get()->Reset();
+        Tween->Get()->Kill();
     }
     ActiveTweens.Remove(Handle.Guid);
 }

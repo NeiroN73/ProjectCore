@@ -17,11 +17,8 @@ class PROJECTCORERUNTIME_API UJsonConfig : public UConfig
 protected:
 	UPROPERTY(EditAnywhere, Category="Json config")
 	FFilePath JsonPath;
-
-	UFUNCTION(CallInEditor, Category="Json config", DisplayName="Read from json")
+	
 	virtual void ReadJson() {}
-
-	UFUNCTION(CallInEditor, Category="Json config", DisplayName="Write to json")
 	virtual void WriteJson() {}
 
 	template<typename TParams = FJsonParams>
@@ -35,5 +32,8 @@ protected:
 	{
 		UJsonStructSerializer::WriteStructToJson(JsonPath.FilePath, Params);
 	}
+
+	virtual void PostLoad() override;
+	virtual void PreSave(FObjectPreSaveContext SaveContext) override;
 #endif
 };

@@ -6,7 +6,6 @@
 #include "GameplayTagContainer.h"
 #include "Handlerable.h"
 #include "GameFramework/Actor.h"
-#include "ProjectCoreRuntime/EditorUtils/CustomId.h"
 #include "ActorHandler.generated.h"
 
 UCLASS()
@@ -15,13 +14,10 @@ public IHandlerable
 {
 	GENERATED_BODY()
 
-public:
-	UPROPERTY(EditAnywhere)
-	FCustomId Id;
-
+protected:
 	UPROPERTY(EditAnywhere)
 	FGameplayTag Tag;
 
-private:
-	virtual FName GetId() override;
+public:
+	FGameplayTag GetTag();
 };

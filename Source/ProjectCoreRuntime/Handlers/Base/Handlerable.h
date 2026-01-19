@@ -15,7 +15,4 @@ class UHandlerable : public UInterface
 class PROJECTCORERUNTIME_API IHandlerable
 {
 	GENERATED_BODY()
-
-public:
-	virtual FName GetId() = 0;
 };

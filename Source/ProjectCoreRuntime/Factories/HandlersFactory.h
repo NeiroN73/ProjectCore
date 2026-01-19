@@ -29,9 +29,11 @@ public:
 	FOnActorHandlerAdded OnActorHandlerAdded;
 	
 	template<class TActor = AActorHandler>
-	TActor* SpawnHandler(FName Id = "", FVector Location = FVector::ZeroVector, FRotator Rotation = FRotator::ZeroRotator)
+	TActor* SpawnHandler(FGameplayTag Tag = FGameplayTag::EmptyTag,
+		FVector Location = FVector::ZeroVector,
+		FRotator Rotation = FRotator::ZeroRotator)
 	{
-		if (auto Class = HandlersConfig->HandlersById.Find(Id))
+		if (auto Class = HandlersConfig->HandlersById.Find(Tag))
 		{
 			if (auto Handler = World->SpawnActor<TActor>(*Class, Location, Rotation))
 			{
@@ -44,10 +46,11 @@ public:
 	}
 
 	template<class TCharacter = ACharacterHandler>
-	TCharacter* SpawnCharacterHandler(FName Id = "", FVector Location = FVector::ZeroVector,
+	TCharacter* SpawnCharacterHandler(FGameplayTag Tag = FGameplayTag::EmptyTag,
+		FVector Location = FVector::ZeroVector,
 		FRotator Rotation = FRotator::ZeroRotator)
 	{
-		if (auto Class = HandlersConfig->HandlersById.Find(Id))
+		if (auto Class = HandlersConfig->HandlersById.Find(Tag))
 		{
 			if (auto Handler = World->SpawnActor<TCharacter>(*Class, Location, Rotation))
 			{

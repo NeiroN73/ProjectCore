@@ -3,10 +3,11 @@
 
 #include "HandlersService.h"
 
+#include "Kismet/GameplayStatics.h"
 #include "ProjectCoreRuntime/Factories/HandlersFactory.h"
 #include "ProjectCoreRuntime/Handlers/CharacterHandler.h"
 #include "ProjectCoreRuntime/Handlers/Base/ActorHandler.h"
-#include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
+#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 
 void UHandlersService::Inject(UInstallerContainer* Container)
 {
@@ -45,10 +46,10 @@ void UHandlersService::WorldChanged(UWorld* NewWorld)
 
 void UHandlersService::AddCharacterHandler(ACharacterHandler* CharacterHandler)
 {
-	CharactersById.Add(CharacterHandler->Id, CharacterHandler);
+	CharactersById.Add(CharacterHandler->GetTag(), CharacterHandler);
 }
 
 void UHandlersService::AddActorHandler(AActorHandler* Handler)
 {
-	HandlersById.Add(Handler->Id, Handler);
+	HandlersById.Add(Handler->GetTag(), Handler);
 }

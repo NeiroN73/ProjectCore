@@ -3,9 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "Handlerable.h"
 #include "GameFramework/Pawn.h"
-#include "ProjectCoreRuntime/EditorUtils/CustomId.h"
 #include "ProjectCoreRuntime/Services/Base/Fragmentable.h"
 #include "PawnHandler.generated.h"
 
@@ -19,13 +19,11 @@ public IHandlerable
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, Category="Id")
-	FCustomId Id;
+	UPROPERTY(EditAnywhere)
+	FGameplayTag Tag;
 
 	UPROPERTY()
 	TObjectPtr<UFragmentsContainer> FragmentsContainer;
 	
 	APawnHandler();
-
-	virtual FName GetId() override;
 };

@@ -3,8 +3,7 @@
 
 #include "ActorHandler.h"
 
-
-FName AActorHandler::GetId()
+FGameplayTag AActorHandler::GetTag()
 {
-	return Id;
+	return Tag;
 }

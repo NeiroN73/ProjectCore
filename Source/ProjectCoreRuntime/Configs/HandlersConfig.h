@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "Base/Config.h"
-#include "ProjectCoreRuntime/EditorUtils/CustomId.h"
 #include "HandlersConfig.generated.h"
 
 UCLASS()
@@ -14,5 +14,5 @@ class PROJECTCORERUNTIME_API UHandlersConfig : public UConfig
 	
 public:
 	UPROPERTY(EditAnywhere)
-	TMap<FCustomId, TSubclassOf<AActor>> HandlersById;
+	TMap<FGameplayTag, TSubclassOf<AActor>> HandlersById;
 };

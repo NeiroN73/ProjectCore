@@ -7,10 +7,9 @@ UENUM()
 enum class ETweenEaseType : uint8
 {
     Linear,
-    EaseIn,
-    EaseOut,
-    EaseInOut,
-    CustomCurve
+    EasySinIn,
+    EasySinOut,
+    EasySinInOut
 };
 
 USTRUCT()
@@ -32,7 +31,6 @@ struct FTweenBase
     float CurrentTime = 0.f;
     float Duration = 0.f;
     ETweenEaseType EaseType = ETweenEaseType::Linear;
-    TWeakObjectPtr<UCurveFloat> CustomCurve = nullptr;
     FSimpleDelegate CompleteCallback;
     
     virtual void OnTick(float DeltaTime) PURE_VIRTUAL(FTweenBase::OnTick)
@@ -51,16 +49,25 @@ struct FTweenBase
         CurrentTime = Duration;
     }
 
+    void Kill()
+    {
+        Handle.Guid.Invalidate();
+    }
+
+    bool IsValid() const
+    {
+        return Handle.Guid.IsValid();
+    }
+
 protected:
     float GetEasedAlpha() const
     {
         auto Alpha = Duration < 0 ? 1.0f : FMath::Clamp(CurrentTime / Duration, 0.f, 1.f);
         switch(EaseType)
         {
-            case ETweenEaseType::EaseIn: return FMath::InterpEaseIn(0.f, 1.f, Alpha, 2.f);
-            case ETweenEaseType::EaseOut: return FMath::InterpEaseOut(0.f, 1.f, Alpha, 2.f);
-            case ETweenEaseType::EaseInOut: return FMath::InterpEaseInOut(0.f, 1.f, Alpha, 2.f);
-            case ETweenEaseType::CustomCurve: return CustomCurve.IsValid() ? CustomCurve->GetFloatValue(Alpha) : Alpha;
+            case ETweenEaseType::EasySinIn: return FMath::InterpSinIn(0.f, 1.f, Alpha);
+            case ETweenEaseType::EasySinOut: return FMath::InterpSinOut(0.f, 1.f, Alpha);
+            case ETweenEaseType::EasySinInOut: return FMath::InterpSinInOut(0.f, 1.f, Alpha);
             default: return Alpha;
         }
     }
@@ -89,7 +96,7 @@ struct FFloatTween : public FTweenBase
 };
 
 USTRUCT()
-struct FActorMoveTween : public FTweenBase
+struct FActorLocationTween : public FTweenBase
 {
     GENERATED_BODY()
 
@@ -201,13 +208,6 @@ struct TTweenBuilder
         return *this;
     }
     
-    TTweenBuilder& SetCustomCurve(UCurveFloat* Curve)
-    {
-        Tween->CustomCurve = Curve;
-        Tween->EaseType = ETweenEaseType::CustomCurve;
-        return *this;
-    }
-    
     TTweenBuilder& OnComplete(FSimpleDelegate Callback)
     {
         Tween->CompleteCallback = Callback;
@@ -226,14 +226,14 @@ struct FFloatTweenBuilder : public TTweenBuilder<FFloatTween>
     
     FFloatTweenBuilder& SetLoop(int32 Count, bool bPingPong = false)
     {
-        // TODO: Implement loop logic
+        //todo: Implement loop logic
         return *this;
     }
 };
 
-struct FActorMoveTweenBuilder : public TTweenBuilder<FActorMoveTween>
+struct FActorMoveTweenBuilder : public TTweenBuilder<FActorLocationTween>
 {
-    FActorMoveTweenBuilder(TSharedPtr<FActorMoveTween> InTween) : TTweenBuilder(InTween) {}
+    FActorMoveTweenBuilder(TSharedPtr<FActorLocationTween> InTween) : TTweenBuilder(InTween) {}
 };
 
 struct FActorRotateTweenBuilder : public TTweenBuilder<FActorRotateTween>

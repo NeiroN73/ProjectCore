@@ -8,8 +8,3 @@ APawnHandler::APawnHandler()
 {
 	PrimaryActorTick.bCanEverTick = false;
 }
-
-FName APawnHandler::GetId()
-{
-	return Id;
-}

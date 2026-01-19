@@ -1,7 +1,5 @@
 ﻿#include "ProjectCoreEditor.h"
 
-#include "CustomId/CustomIdPropertyTypeCustomization.h"
-
 #define LOCTEXT_NAMESPACE "FProjectCoreEditorModule"
 
 void FProjectCoreEditorModule::StartupModule()
@@ -15,16 +13,6 @@ void FProjectCoreEditorModule::StartupModule()
 	{
 		CreateAssetTypeActions<FAssetTypeActions_HistoryGraph>(AssetTools);
 	}
-
-	FPropertyEditorModule& PropertyModule = FModuleManager::LoadModuleChecked<FPropertyEditorModule>("PropertyEditor");
-	
-	PropertyModule.RegisterCustomPropertyTypeLayout(
-		"CustomId",
-		FOnGetPropertyTypeCustomizationInstance::
-		CreateStatic(&FCustomIdPropertyTypeCustomization::MakeInstance)
-	);
-
-	PropertyModule.NotifyCustomizationModuleChanged();
 }
 
 void FProjectCoreEditorModule::ShutdownModule()

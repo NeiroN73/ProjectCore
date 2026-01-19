@@ -3,10 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "GameFramework/Character.h"
-#include "ProjectCoreRuntime/EditorUtils/CustomId.h"
 #include "ProjectCoreRuntime/Handlers/Base/Handlerable.h"
-#include "ProjectCoreRuntime/TableConfigs/HandlersTableData.h"
 #include "CharacterHandler.generated.h"
 
 UCLASS(Abstract)
@@ -15,12 +14,11 @@ public IHandlerable
 {
 	GENERATED_BODY()
 
-public:
-	UPROPERTY(EditAnywhere, Category="Id")
-	FCustomId Id;
+protected:
+	UPROPERTY(EditAnywhere)
+	FGameplayTag Tag;
 
+	public:
+	FGameplayTag GetTag();
 	ACharacterHandler();
-
-private:
-	virtual FName GetId() override;
 };

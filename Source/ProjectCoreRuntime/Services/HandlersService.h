@@ -19,17 +19,17 @@ public IInjectable
 
 public:
 	UPROPERTY()
-	TMap<FName, ACharacterHandler*> CharactersById;
+	TMap<FGameplayTag, ACharacterHandler*> CharactersById;
 	UPROPERTY()
-	TMap<FName, AActorHandler*> HandlersById;
+	TMap<FGameplayTag, AActorHandler*> HandlersById;
 	
 	virtual void Inject(UInstallerContainer* Container) override;
 	virtual void WorldChanged(UWorld* NewWorld) override;
 
 	template<typename TCharacterHandler = ACharacterHandler>
-	TCharacterHandler* GetCharacterHandler(FName Id)
+	TCharacterHandler* GetCharacterHandler(FGameplayTag Tag)
 	{
-		if (auto Character = CharactersById.FindRef(Id))
+		if (auto Character = CharactersById.FindRef(Tag))
 		{
 			return Cast<TCharacterHandler>(Character);
 		}
@@ -38,9 +38,9 @@ public:
 	}
 	
 	template<typename THandler = AActorHandler>
-	THandler* GetActorHandler(FName Id)
+	THandler* GetActorHandler(FGameplayTag Tag)
 	{
-		if (auto Actor = HandlersById.FindRef(Id))
+		if (auto Actor = HandlersById.FindRef(Tag))
 		{
 			return Cast<THandler>(Actor);
 		}
