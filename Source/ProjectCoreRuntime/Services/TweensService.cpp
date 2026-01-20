@@ -49,7 +49,7 @@ FFloatTweenBuilder UTweensService::CreateFloatTween(float From, float To, float 
     return FFloatTweenBuilder(Tween);
 }
 
-FActorMoveTweenBuilder UTweensService::CreateMoveTween(AActor* Actor, const FVector& ToLocation, float Duration)
+FActorLocationTweenBuilder UTweensService::CreateMoveTween(AActor* Actor, const FVector& ToLocation, float Duration)
 {
     auto Tween = MakeShared<FActorLocationTween>();
     Tween->Handle.Guid = FGuid::NewGuid();
@@ -59,21 +59,7 @@ FActorMoveTweenBuilder UTweensService::CreateMoveTween(AActor* Actor, const FVec
     Tween->Duration = Duration;
     
     ActiveTweens.Add(Tween->Handle.Guid, Tween);
-    return FActorMoveTweenBuilder(Tween);
-}
-
-FActorTransformTweenBuilder UTweensService::CreateFollowTween(AActor* Actor, USceneComponent* Target, float Duration,
-    float Speed)
-{
-    auto Tween = MakeShared<FActorTransformTween>();
-    Tween->Handle.Guid = FGuid::NewGuid();
-    Tween->Actor = Actor;
-    Tween->TargetComponent = Target;
-    Tween->Duration = Duration;
-    Tween->Speed = Speed;
-    
-    ActiveTweens.Add(Tween->Handle.Guid, Tween);
-    return FActorTransformTweenBuilder(Tween);
+    return FActorLocationTweenBuilder(Tween);
 }
 
 FActorRotateTweenBuilder UTweensService::CreateRotateTween(AActor* Actor, const FRotator& ToRotation, float Duration)

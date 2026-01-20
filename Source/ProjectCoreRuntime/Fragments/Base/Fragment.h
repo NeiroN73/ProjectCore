@@ -14,5 +14,5 @@ class PROJECTCORERUNTIME_API UFragment : public UObject
 	GENERATED_BODY()
 
 public:
-	virtual void ProcessFragmentsFromContainer(UFragmentsContainer* InFragmentsContainer) {}
+	virtual void InitializeFragments(UFragmentsContainer* InFragmentsContainer) {}
 };

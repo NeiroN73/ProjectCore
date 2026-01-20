@@ -25,9 +25,7 @@ public class ProjectCoreRuntime : ModuleRules
             new string[]
             {
                 "Slate",
-                "SlateCore",
-                "MessageLog",
-                "UnrealEd"
+                "SlateCore"
             }
         );
     }

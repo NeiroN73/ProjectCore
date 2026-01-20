@@ -28,11 +28,11 @@ public:
 	virtual void WorldChanged(UWorld* NewWorld) override;
 
 protected:
-	void ExecuteInjectables(TArray<UObject*>& Injectables);
-	void ExecutePreInitializables(TArray<UObject*>& PreInitializables);
-	void ExecuteInitializables(TArray<UObject*>& Initializables);
-	void ExecuteTickables(TArray<UObject*>& Tickables);
-	void ExecuteFragmentables(TArray<UObject*>& Fragmentables);
+	void ExecuteInjectables(TArray<UObject*> Injectables);
+	void ExecutePreInitializables(TArray<UObject*> PreInitializables);
+	void ExecuteInitializables(TArray<UObject*> Initializables);
+	void ExecuteTickables(TArray<UObject*> Tickables);
+	void ExecuteFragmentables(TArray<UObject*> Fragmentables);
     
 	void ExecuteInjectable(UObject* Object);
 	void ExecutePreInitializable(UObject* Object);

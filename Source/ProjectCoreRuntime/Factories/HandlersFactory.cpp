@@ -22,7 +22,7 @@ void UHandlersFactory::InitializeCharacterHandler(ACharacterHandler* Handler)
 	ExecuteInitializable(Handler);
 	ExecuteTickable(Handler);
 
-	//OnCharacterHandlerAdded.Execute(Handler);
+	OnCharacterHandlerAdded.ExecuteIfBound(Handler);
 }
 
 void UHandlersFactory::InitializeHandler(AActorHandler* InHandler)

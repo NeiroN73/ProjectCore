@@ -59,9 +59,9 @@ public:
 	UDataTable* ResolveTableConfig()
 	{
 		auto Name = T::StaticStruct()->GetFName();
-		if (auto Object = DataTableRegistrations.FindRef(Name))
+		if (auto Object = DataTableRegistrations.Find(Name))
 		{
-			return Object;
+			return *Object;
 		}
 		
 		return nullptr;
@@ -70,16 +70,15 @@ public:
 	template<typename T = UObject>
 	TArray<T*> ResolveAll()
 	{
-		TSubclassOf<UObject> InClass = T::StaticClass();
 		TArray<T*> ResultArray;
 
 		for (const auto& Pair : Registrations)
 		{
 			if (UObject* Object = Pair.Value)
 			{
-				if (Object->IsA(InClass))
+				if (auto CastedObject = Cast<T>(Object))
 				{
-					ResultArray.Add(Cast<T>(Object));
+					ResultArray.Add(CastedObject);
 				}
 			}
 		}
@@ -90,15 +89,17 @@ public:
 	TArray<TInterface*> ResolveAllImplements()
 	{
 		TArray<TInterface*> ResultArray;
-		const UClass* InterfaceClass = TInterface::UClassType::StaticClass();
 
 		if (Registrations.Num() > 0)
 		{
 			for (const auto& [Class, Object] : Registrations)
 			{
-				if (Object && Class && Class->ImplementsInterface(InterfaceClass))
+				if (Object && Class)
 				{
-					ResultArray.Add(Cast<TInterface>(Object));
+					if (auto CastObject = Cast<TInterface>(Object))
+					{
+						ResultArray.Add(CastObject);
+					}
 				}
 			}
 		}

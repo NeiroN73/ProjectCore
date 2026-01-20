@@ -3,8 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "StateMachine/InstallerStateMachine.h"
 #include "InstallerGameSubsystem.generated.h"
+
+class UInstallerScope;
+class UInstallerContainer;
 
 UCLASS()
 class PROJECTCORERUNTIME_API UInstallerGameSubsystem : public UGameInstanceSubsystem
@@ -13,7 +15,7 @@ class PROJECTCORERUNTIME_API UInstallerGameSubsystem : public UGameInstanceSubsy
 	
 public:
 	UPROPERTY()
-	TObjectPtr<UInstallerStateMachine> StateMachine;
-	UPROPERTY()
 	TObjectPtr<UInstallerContainer> InstallerContainer;
+	UPROPERTY()
+	TObjectPtr<UInstallerScope> InstallerScope;
 };

@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Object.h"
-#include "ProjectCoreRuntime/GameModes/Base/InstallerGameMode.h"
 #include "InstallerStateMachine.generated.h"
 
 class UInstallerState;

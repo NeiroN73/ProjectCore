@@ -8,18 +8,17 @@ void UTickService::OnTick(float DeltaSeconds)
 {
 	for (auto Tickable : Tickables)
 	{
-		if (Tickable)
+		if (Tickable.Get())
 		{
 			Tickable->OnTick(DeltaSeconds);
-		}
-		else
-		{
-			Tickables.Remove(Tickable);
 		}
 	}
 }
 
 void UTickService::RegisterTick(ITickable* Tickable)
 {
-	Tickables.Add(Tickable);
+	if (!Tickables.Contains(Tickable))
+	{
+		Tickables.Add(Tickable);
+	}
 }

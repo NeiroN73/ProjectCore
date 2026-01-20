@@ -19,5 +19,5 @@ public:
 	void RegisterTick(ITickable* Tickable);
 
 private:
-	TArray<ITickable*> Tickables;
+	TArray<TWeakInterfacePtr<ITickable>> Tickables;
 };

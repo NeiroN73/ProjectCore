@@ -44,11 +44,6 @@ struct FTweenBase
         return CurrentTime >= Duration;
     }
 
-    void Reset()
-    {
-        CurrentTime = Duration;
-    }
-
     void Kill()
     {
         Handle.Guid.Invalidate();
@@ -116,27 +111,6 @@ struct FActorLocationTween : public FTweenBase
 };
 
 USTRUCT()
-struct FActorTransformTween : public FTweenBase
-{
-    GENERATED_BODY()
-
-    TWeakObjectPtr<AActor> Actor;
-    UPROPERTY()
-    USceneComponent* TargetComponent;
-    float Speed;
-
-    virtual void OnTick(float DeltaTime) override
-    {
-        CurrentTime += DeltaTime;
-        if (Actor.IsValid())
-        {
-            const float EasedAlpha = GetEasedAlpha();
-            Actor->SetActorLocation(FMath::Lerp(Actor->GetActorLocation(), TargetComponent->GetComponentLocation(), EasedAlpha));
-        }
-    }
-};
-
-USTRUCT()
 struct FActorRotateTween : public FTweenBase
 {
     GENERATED_BODY()
@@ -176,27 +150,6 @@ struct FActorScaleTween : public FTweenBase
     }
 };
 
-USTRUCT()
-struct FPhysicsTween : public FTweenBase
-{
-    GENERATED_BODY()
-
-    TWeakObjectPtr<UPrimitiveComponent> Component;
-    FVector StartLocation;
-    FVector EndLocation;
-    float PhysicsForce = 1000.0f;
-
-    virtual void OnTick(float DeltaTime) override
-    {
-        CurrentTime += DeltaTime;
-        if (Component.IsValid() && Component->IsSimulatingPhysics())
-        {
-            const FVector Direction = (EndLocation - Component->GetComponentLocation()).GetSafeNormal();
-            Component->AddForce(Direction * PhysicsForce);
-        }
-    }
-};
-
 template<typename TTween>
 struct TTweenBuilder
 {
@@ -231,9 +184,9 @@ struct FFloatTweenBuilder : public TTweenBuilder<FFloatTween>
     }
 };
 
-struct FActorMoveTweenBuilder : public TTweenBuilder<FActorLocationTween>
+struct FActorLocationTweenBuilder : public TTweenBuilder<FActorLocationTween>
 {
-    FActorMoveTweenBuilder(TSharedPtr<FActorLocationTween> InTween) : TTweenBuilder(InTween) {}
+    FActorLocationTweenBuilder(TSharedPtr<FActorLocationTween> InTween) : TTweenBuilder(InTween) {}
 };
 
 struct FActorRotateTweenBuilder : public TTweenBuilder<FActorRotateTween>
@@ -244,9 +197,4 @@ struct FActorRotateTweenBuilder : public TTweenBuilder<FActorRotateTween>
 struct FActorScaleTweenBuilder : public TTweenBuilder<FActorScaleTween>
 {
     FActorScaleTweenBuilder(TSharedPtr<FActorScaleTween> InTween) : TTweenBuilder(InTween) {}
-};
-
-struct FActorTransformTweenBuilder : public TTweenBuilder<FActorTransformTween>
-{
-    FActorTransformTweenBuilder(TSharedPtr<FActorTransformTween> InTween) : TTweenBuilder(InTween) {}
 };

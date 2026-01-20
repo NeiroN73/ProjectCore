@@ -25,7 +25,7 @@ void UBaseFactory::WorldChanged(UWorld* NewWorld)
 	World = NewWorld;
 }
 
-void UBaseFactory::ExecuteInjectables(TArray<UObject*>& Injectables)
+void UBaseFactory::ExecuteInjectables(TArray<UObject*> Injectables)
 {
     for (auto Injectable : Injectables)
     {
@@ -33,7 +33,7 @@ void UBaseFactory::ExecuteInjectables(TArray<UObject*>& Injectables)
     }
 }
 
-void UBaseFactory::ExecutePreInitializables(TArray<UObject*>& PreInitializables)
+void UBaseFactory::ExecutePreInitializables(TArray<UObject*> PreInitializables)
 {
     for (auto PreInitializable : PreInitializables)
     {
@@ -41,7 +41,7 @@ void UBaseFactory::ExecutePreInitializables(TArray<UObject*>& PreInitializables)
     }
 }
 
-void UBaseFactory::ExecuteInitializables(TArray<UObject*>& Initializables)
+void UBaseFactory::ExecuteInitializables(TArray<UObject*> Initializables)
 {
     for (auto Initializable : Initializables)
     {
@@ -49,15 +49,18 @@ void UBaseFactory::ExecuteInitializables(TArray<UObject*>& Initializables)
     }
 }
 
-void UBaseFactory::ExecuteTickables(TArray<UObject*>& Tickables)
+void UBaseFactory::ExecuteTickables(TArray<UObject*> Tickables)
 {
     for (auto Tickable : Tickables)
     {
-        ExecuteTickable(Tickable);
+        if (Tickable && Tickable != nullptr)
+        {
+            ExecuteTickable(Tickable);
+        }
     }
 }
 
-void UBaseFactory::ExecuteFragmentables(TArray<UObject*>& Fragmentables)
+void UBaseFactory::ExecuteFragmentables(TArray<UObject*> Fragmentables)
 {
     for (auto Fragmentable : Fragmentables)
     {
@@ -111,7 +114,7 @@ void UBaseFactory::ExecuteFragmentable(UObject* Object)
         
         for (auto Fragment : Fragments)
         {
-            Fragment->ProcessFragmentsFromContainer(FragmentsContainer);
+            Fragment->InitializeFragments(FragmentsContainer);
             
             ObjectFragments.Add(Fragment);
         }
