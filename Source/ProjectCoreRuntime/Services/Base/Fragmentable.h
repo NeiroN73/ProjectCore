@@ -18,4 +18,5 @@ class PROJECTCORERUNTIME_API IFragmentable
 
 public:
 	virtual void BuildFragments(UFragmentsContainer* FragmentsContainer) = 0;
+	virtual UFragmentsContainer* GetFragmentsContainer() = 0;
 };
