@@ -21,9 +21,6 @@ public IHandlerable
 public:
 	UPROPERTY(EditAnywhere)
 	FGameplayTag Tag;
-
-	UPROPERTY()
-	TObjectPtr<UFragmentsContainer> FragmentsContainer;
 	
 	APawnHandler();
 };

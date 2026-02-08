@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "JsonObjectConverter.h"
-#include "ProjectCoreRuntime/EditorUtils/Logger/Logger.h"
+#include "Logger.h"
 #include "UObject/Object.h"
 #include "JsonStructSerializer.generated.h"
 

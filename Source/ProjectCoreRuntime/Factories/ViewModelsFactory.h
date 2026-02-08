@@ -19,7 +19,6 @@ public:
 	{
 		TViewModel* ViewModel = NewObject<TViewModel>();
 		ExecuteInjectable(ViewModel);
-		ExecutePreInitializable(ViewModel);
 		ExecuteInitializable(ViewModel);
 		ExecuteTickable(ViewModel);
 		return ViewModel;

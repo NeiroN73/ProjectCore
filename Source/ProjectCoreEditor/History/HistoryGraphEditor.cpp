@@ -13,12 +13,12 @@
 #include "GraphNodes/ReturnHistoryGraphNode.h"
 #include "Toolkits/ToolkitManager.h"
 #include "ProjectCoreRuntime/Configs/HistoryConfig.h"
-#include "ProjectCoreRuntime/EditorUtils/Logger/Logger.h"
 #include "ProjectCoreRuntime/History/Conditions/Base/HistoryCondition.h"
 #include "ProjectCoreRuntime/History/Elements/HistoryElement.h"
 #include "ProjectCoreRuntime/History/Elements/RootHistoryElement.h"
 #include "ProjectCoreRuntime/History/Triggers/Base/HistoryTrigger.h"
 #include "ProjectCoreRuntime/History/Actions/Base/HistoryAction.h"
+#include "ProjectCoreRuntime/Utils/Logger.h"
 #include "Windows/WindowsPlatformApplicationMisc.h"
 
 void FHistoryGraphEditor::InitHistoryGraphAssetEditor(const EToolkitMode::Type Mode,

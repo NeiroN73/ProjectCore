@@ -28,14 +28,43 @@ public:
 	virtual void WorldChanged(UWorld* NewWorld) override;
 
 protected:
-	void ExecuteInjectables(TArray<UObject*> Injectables);
-	void ExecutePreInitializables(TArray<UObject*> PreInitializables);
-	void ExecuteInitializables(TArray<UObject*> Initializables);
-	void ExecuteTickables(TArray<UObject*> Tickables);
-	void ExecuteFragmentables(TArray<UObject*> Fragmentables);
+	template<class TObject = UObject>
+	void ExecuteInjectables(TArray<TObject*> Injectables)
+	{
+		for (auto Injectable : Injectables)
+		{
+			ExecuteInjectable(Cast<UObject>(Injectable));
+		}
+	}
+
+	template<class TObject = UObject>
+	void ExecuteInitializables(TArray<TObject*> Initializables)
+	{
+		for (auto Initializable : Initializables)
+		{
+			ExecuteInitializable(Cast<UObject>(Initializable));
+		}
+	}
+
+	template<class TObject = UObject>
+	void ExecuteTickables(TArray<TObject*> Tickables)
+	{
+		for (auto Tickable : Tickables)
+		{
+			ExecuteTickable(Cast<UObject>(Tickable));
+		}
+	}
+
+	template<class TObject = UObject>
+	void ExecuteFragmentables(TArray<TObject*> Fragmentables)
+	{
+		for (auto Fragmentable : Fragmentables)
+		{
+			ExecuteFragmentable(Cast<UObject>(Fragmentable));
+		}
+	}
     
 	void ExecuteInjectable(UObject* Object);
-	void ExecutePreInitializable(UObject* Object);
 	void ExecuteInitializable(UObject* Object);
 	void ExecuteTickable(UObject* Object);
 	void ExecuteFragmentable(UObject* Object);

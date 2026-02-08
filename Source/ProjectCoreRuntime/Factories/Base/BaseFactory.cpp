@@ -25,49 +25,6 @@ void UBaseFactory::WorldChanged(UWorld* NewWorld)
 	World = NewWorld;
 }
 
-void UBaseFactory::ExecuteInjectables(TArray<UObject*> Injectables)
-{
-    for (auto Injectable : Injectables)
-    {
-        ExecuteInjectable(Injectable);
-    }
-}
-
-void UBaseFactory::ExecutePreInitializables(TArray<UObject*> PreInitializables)
-{
-    for (auto PreInitializable : PreInitializables)
-    {
-        ExecutePreInitializable(PreInitializable);
-    }
-}
-
-void UBaseFactory::ExecuteInitializables(TArray<UObject*> Initializables)
-{
-    for (auto Initializable : Initializables)
-    {
-        ExecuteInitializable(Initializable);
-    }
-}
-
-void UBaseFactory::ExecuteTickables(TArray<UObject*> Tickables)
-{
-    for (auto Tickable : Tickables)
-    {
-        if (Tickable && Tickable != nullptr)
-        {
-            ExecuteTickable(Tickable);
-        }
-    }
-}
-
-void UBaseFactory::ExecuteFragmentables(TArray<UObject*> Fragmentables)
-{
-    for (auto Fragmentable : Fragmentables)
-    {
-        ExecuteFragmentable(Fragmentable);
-    }
-}
-
 void UBaseFactory::ExecuteInjectable(UObject* Object)
 {
     if (auto Injectable = Cast<IInjectable>(Object))
@@ -76,16 +33,12 @@ void UBaseFactory::ExecuteInjectable(UObject* Object)
     }
 }
 
-void UBaseFactory::ExecutePreInitializable(UObject* Object)
+void UBaseFactory::ExecuteInitializable(UObject* Object)
 {
     if (auto PreInitializable = Cast<IPreInitializable>(Object))
     {
         PreInitializable->PreInitialize();
     }
-}
-
-void UBaseFactory::ExecuteInitializable(UObject* Object)
-{
     if (auto Initializable = Cast<IInitializable>(Object))
     {
         Initializable->Initialize();
@@ -120,7 +73,6 @@ void UBaseFactory::ExecuteFragmentable(UObject* Object)
         }
         
         ExecuteInjectables(ObjectFragments);
-        ExecutePreInitializables(ObjectFragments);
         ExecuteInitializables(ObjectFragments);
         ExecuteTickables(ObjectFragments);
     }

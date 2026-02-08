@@ -18,7 +18,6 @@ void UHandlersFactory::InitializeCharacterHandler(ACharacterHandler* Handler)
 	}
 	
 	ExecuteFragmentable(Handler);
-	ExecutePreInitializable(Handler);
 	ExecuteInitializable(Handler);
 	ExecuteTickable(Handler);
 
@@ -29,7 +28,6 @@ void UHandlersFactory::InitializeHandler(AActorHandler* InHandler)
 {
 	ExecuteInjectable(InHandler);
 	ExecuteFragmentable(InHandler);
-	ExecutePreInitializable(InHandler);
 	ExecuteInitializable(InHandler);
 	ExecuteTickable(InHandler);
 
