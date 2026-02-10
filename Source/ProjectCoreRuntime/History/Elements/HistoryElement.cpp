@@ -7,27 +7,26 @@
 #include "ProjectCoreRuntime/History/Actions/Base/HistoryAction.h"
 #include "ProjectCoreRuntime/History/Conditions/Base/HistoryCondition.h"
 #include "ProjectCoreRuntime/History/Triggers/Base/HistoryTrigger.h"
-#include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
-#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
-#include "ProjectCoreRuntime/Services/HistoryService.h"
+#include "ProjectCoreRuntime/Subsystems/ConfigsSubsystem.h"
+#include "ProjectCoreRuntime/Subsystems/HistorySubsystem.h"
 
-void UHistoryElement::Inject(UInstallerContainer* Container)
+void UHistoryElement::Inject()
 {
-	HistoryService = Container->Resolve<UHistoryService>();
-	HistoryConfig = Container->Resolve<UHistoryConfig>();
+	HistoryService = GetWorld()->GetGameInstance()->GetSubsystem<UHistorySubsystem>();
+	HistoryConfig = GetWorld()->GetGameInstance()->GetSubsystem<UConfigsSubsystem>()->GetConfig<UHistoryConfig>();
     	
-	for (const auto& Trigger : Triggers)
-	{
-		Trigger->Inject(Container);
-	}
-	for (const auto& Action : Actions)
-	{
-		Action->Inject(Container);
-	}
-	for (const auto& Condition : Conditions)
-	{
-		Condition->Inject(Container);
-	}
+	// for (const auto& Trigger : Triggers)
+	// {
+	// 	Trigger->Inject(Container);
+	// }
+	// for (const auto& Action : Actions)
+	// {
+	// 	Action->Inject(Container);
+	// }
+	// for (const auto& Condition : Conditions)
+	// {
+	// 	Condition->Inject(Container);
+	// }
 }
 
 void UHistoryElement::Initialize()

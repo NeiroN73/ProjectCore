@@ -7,7 +7,7 @@
 #include "HistoryAction.generated.h"
 
 class UInstallerContainer;
-class UHistoryService;
+class UHistorySubsystem;
 
 UCLASS(Blueprintable, BlueprintType, Abstract, EditInlineNew)
 class PROJECTCORERUNTIME_API UHistoryAction : public UObject

@@ -21,13 +21,13 @@ public:
 		{
 			FActorSpawnParameters SpawnParams;
 			SpawnParams.Name = FName("PoolsContainer");
-			PoolsContainer = World->SpawnActor<AActor>(SpawnParams);
+			PoolsContainer = GetWorld()->SpawnActor<AActor>(SpawnParams);
 			PoolsContainer->Rename(TEXT("PoolsContainer"));
 			auto PoolSceneComponent = NewObject<USceneComponent>(PoolsContainer);
 			PoolsContainer->SetRootComponent(PoolSceneComponent);
 		}
 
-		auto Pool = NewObject<TObjectPool>(World);
+		auto Pool = NewObject<TObjectPool>();
 		return Pool;
 	}
 

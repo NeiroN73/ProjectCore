@@ -9,7 +9,7 @@
 
 class UHistoryConfig;
 class UHistoryAction;
-class UHistoryService;
+class UHistorySubsystem;
 class UHistoryCondition;
 class UInstallerContainer;
 class UHistoryTrigger;
@@ -38,11 +38,11 @@ public:
 	UPROPERTY(Transient)
 	bool bInitialized = false;
 	UPROPERTY()
-	TObjectPtr<UHistoryService> HistoryService;
+	TObjectPtr<UHistorySubsystem> HistoryService;
 	UPROPERTY()
 	TObjectPtr<UHistoryConfig> HistoryConfig;
 
-	virtual void Inject(UInstallerContainer* Container);
+	virtual void Inject();
 	virtual void Initialize();
 	virtual void TryProgress();
 	virtual void Disable();

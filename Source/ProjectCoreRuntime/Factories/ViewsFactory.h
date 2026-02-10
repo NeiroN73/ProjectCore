@@ -15,14 +15,12 @@ class PROJECTCORERUNTIME_API UViewsFactory : public UBaseFactory
 	GENERATED_BODY()
 
 public:
-	virtual void Inject(UInstallerContainer* Container) override;
-	
 	void InitializeView(UUserWidget* Widget);
 	
 	template<class TWidget = UUserWidget>
 	TWidget* Create(TSubclassOf<TWidget> InClass = TWidget::StaticClass())
 	{
-		if (auto View = CreateWidget<TWidget>(World, InClass))
+		if (auto View = CreateWidget<TWidget>(GetWorld(), InClass))
 		{
 			InitializeView(View);
 			return View;

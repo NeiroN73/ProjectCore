@@ -3,17 +3,6 @@
 
 #include "ScreensFactory.h"
 
-#include "ViewModelsFactory.h"
-#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
-
-void UScreensFactory::Inject(UInstallerContainer* Container)
-{
-	Super::Inject(Container);
-
-	ViewModelFactory = Container->Resolve<UViewModelsFactory>();
-	ScreensConfig = Container->Resolve<UScreensConfig>();
-	AssetsLoaderService = Container->Resolve<UAssetsService>();
-}
 
 void UScreensFactory::InitializeView(UUserWidget* Widget)
 {

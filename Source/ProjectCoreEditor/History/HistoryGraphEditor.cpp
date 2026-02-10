@@ -170,7 +170,7 @@ void FHistoryGraphEditor::OnCommandPasteNodes()
 {
     if (!GraphEditor.IsValid()) return;
 
-    auto PasteLocation = GraphEditor->GetPasteLocation();
+    auto PasteLocation = GraphEditor->GetPasteLocation2f();
     
     UEdGraph* TargetGraph = GraphEditor->GetCurrentGraph();
     if (!TargetGraph) return;

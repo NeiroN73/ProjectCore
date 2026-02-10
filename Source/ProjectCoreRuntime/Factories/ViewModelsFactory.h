@@ -18,9 +18,6 @@ public:
 	TViewModel* Create()
 	{
 		TViewModel* ViewModel = NewObject<TViewModel>();
-		ExecuteInjectable(ViewModel);
-		ExecuteInitializable(ViewModel);
-		ExecuteTickable(ViewModel);
 		return ViewModel;
 	}
 };

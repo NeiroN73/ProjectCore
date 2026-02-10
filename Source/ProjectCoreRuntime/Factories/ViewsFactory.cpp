@@ -3,16 +3,7 @@
 
 #include "ViewsFactory.h"
 
-#include "ViewModelsFactory.h"
-#include "ProjectCoreRuntime/DependencyInjection/InstallerContainer.h"
 #include "ProjectCoreRuntime/UI/Base/View.h"
-
-void UViewsFactory::Inject(UInstallerContainer* Container)
-{
-	Super::Inject(Container);
-	
-	ViewModelsFactory = Container->Resolve<UViewModelsFactory>();
-}
 
 void UViewsFactory::InitializeView(UUserWidget* Widget)
 {

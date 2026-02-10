@@ -7,9 +7,10 @@
 #include "Blueprint/UserWidget.h"
 #include "UObject/Object.h"
 #include "ProjectCoreRuntime/Configs/ScreensConfig.h"
-#include "ProjectCoreRuntime/Services/AssetsService.h"
 #include "ProjectCoreRuntime/UI/Base/Screen.h"
 #include "ScreensFactory.generated.h"
+
+class UAssetsSubsystem;
 
 UCLASS()
 class PROJECTCORERUNTIME_API UScreensFactory : public UBaseFactory
@@ -20,19 +21,17 @@ private:
 	UPROPERTY()
 	TWeakObjectPtr<UScreensConfig> ScreensConfig;
 	UPROPERTY()
-	TWeakObjectPtr<UAssetsService> AssetsLoaderService;
+	TWeakObjectPtr<UAssetsSubsystem> AssetsLoaderService;
 	UPROPERTY()
 	TWeakObjectPtr<UViewModelsFactory> ViewModelFactory;
 	
 public:
-	virtual void Inject(UInstallerContainer* Container) override;
-	
 	template<class TScreen = UScreen>
 	TScreen* Create()
 	{
 		if (auto ViewClass = ScreensConfig->GetScreenClass<TScreen>())
 		{
-			if (auto View = CreateWidget<TScreen>(World, ViewClass))
+			if (auto View = CreateWidget<TScreen>(GetWorld(), ViewClass))
 			{
 				InitializeView(View);
 				return View;

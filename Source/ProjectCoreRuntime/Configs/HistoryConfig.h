@@ -12,8 +12,7 @@ class UBaseHistoryElement;
 class URootHistoryElement;
 
 UCLASS()
-class PROJECTCORERUNTIME_API UHistoryConfig : public UConfig,
-public IInitializable
+class PROJECTCORERUNTIME_API UHistoryConfig : public UConfig
 {
 	GENERATED_BODY()
 
@@ -33,5 +32,5 @@ public:
 		return nullptr;
 	}
 
-	virtual void Initialize() override;
+	virtual void Initialize();
 };

@@ -4,8 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Base/SaveState.h"
-#include "ProjectCoreRuntime/DependencyInjection/Injectable.h"
-#include "ProjectCoreRuntime/Interfaces/Initializable.h"
 #include "HistorySaveState.generated.h"
 
 class UHistoryElement;
@@ -13,9 +11,7 @@ class UBaseHistoryElement;
 class UHistoryConfig;
 
 UCLASS()
-class PROJECTCORERUNTIME_API UHistorySaveState : public USaveState,
-public IInjectable,
-public IInitializable
+class PROJECTCORERUNTIME_API UHistorySaveState : public USaveState
 {
 	GENERATED_BODY()
 
@@ -27,8 +23,7 @@ public:
 	
 	virtual void Read() override;
 	virtual void Write() override;
-	virtual void Inject(UInstallerContainer* Container) override;
-	virtual void Initialize() override;
+	virtual void Initialize();
 
 	void GatherElementsRecursive(const UBaseHistoryElement* ParentElement, TSet<UHistoryElement*>& OutElements);
 	void GatherCurrentElementsRecursive(const UBaseHistoryElement* ParentElement);

@@ -8,7 +8,7 @@
 
 class UHistoryConfig;
 class UInstallerContainer;
-class UHistoryService;
+class UHistorySubsystem;
 
 DECLARE_DELEGATE(FOnCompleted)
 
