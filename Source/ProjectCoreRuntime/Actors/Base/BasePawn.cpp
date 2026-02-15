@@ -3,8 +3,17 @@
 
 #include "BasePawn.h"
 
-
-ABasePawn::ABasePawn()
+FGameplayTag ABasePawn::GetTag()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	return Tag;
+}
+
+UComponentsContainer* ABasePawn::GetComponentsContainer()
+{
+	return ComponentsContainer;
+}
+
+void ABasePawn::SetComponentsContainer(UComponentsContainer* InComponentsContainer)
+{
+	ComponentsContainer = InComponentsContainer;
 }

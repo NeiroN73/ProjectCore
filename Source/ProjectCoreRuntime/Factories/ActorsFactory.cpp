@@ -7,7 +7,7 @@
 #include "ProjectCoreRuntime/Components/Base/ComponentsContainer.h"
 #include "ProjectCoreRuntime/Subsystems/ConfigsSubsystem.h"
 
-void UActorsFactory::InitializeCharacterActor(ABaseCharacter* InCharacter)
+void UActorsFactory::InitializeCharacter(ABaseCharacter* InCharacter)
 {
 	auto NewComponentsContainer = NewObject<UComponentsContainer>(GetWorld());
 	NewComponentsContainer->Construct();
@@ -26,10 +26,28 @@ void UActorsFactory::InitializeCharacterActor(ABaseCharacter* InCharacter)
 
 void UActorsFactory::InitializeActor(ABaseActor* InActor)
 {
+	auto NewComponentsContainer = NewObject<UComponentsContainer>(GetWorld());
+	NewComponentsContainer->Construct();
+	NewComponentsContainer->Initialize();
+	
+	InActor->SetComponentsContainer(NewComponentsContainer);
 	InActor->Construct();
 	InActor->Initialize();
 	
 	OnActorActorAdded.ExecuteIfBound(InActor);
+}
+
+void UActorsFactory::InitializePawn(ABasePawn* InPawn)
+{
+	auto NewComponentsContainer = NewObject<UComponentsContainer>(GetWorld());
+	NewComponentsContainer->Construct();
+	NewComponentsContainer->Initialize();
+	
+	InPawn->SetComponentsContainer(NewComponentsContainer);
+	InPawn->Construct();
+	InPawn->Initialize();
+
+	OnPawnAdded.ExecuteIfBound(InPawn);
 }
 
 void UActorsFactory::Inject()

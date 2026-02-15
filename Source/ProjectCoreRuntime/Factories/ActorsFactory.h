@@ -6,16 +6,17 @@
 #include "Base/BaseFactory.h"
 #include "ProjectCoreRuntime/Actors/Base/BaseActor.h"
 #include "ProjectCoreRuntime/Actors/Base/BaseCharacter.h"
+#include "ProjectCoreRuntime/Actors/Base/BasePawn.h"
 #include "ProjectCoreRuntime/Configs/ActorsConfig.h"
 #include "ProjectCoreRuntime/Interfaces/Injectable.h"
-#include "ProjectCoreRuntime/Subsystems/ConfigsSubsystem.h"
 #include "ActorsFactory.generated.h"
 
 class UActorsConfig;
 class AGameplayGameMode;
 
-DECLARE_DELEGATE_OneParam(FOnCharacterActorAdded, ABaseCharacter*)
-DECLARE_DELEGATE_OneParam(FOnActorActorAdded, ABaseActor*)
+DECLARE_DELEGATE_OneParam(FOnCharacterAdded, ABaseCharacter*)
+DECLARE_DELEGATE_OneParam(FOnActorAdded, ABaseActor*)
+DECLARE_DELEGATE_OneParam(FOnPawnAdded, ABasePawn*)
 
 UCLASS()
 class PROJECTCORERUNTIME_API UActorsFactory : public UBaseFactory,
@@ -28,8 +29,9 @@ private:
 	TWeakObjectPtr<UActorsConfig> ActorsConfig;
 	
 public:
-	FOnCharacterActorAdded OnCharacterActorAdded;
-	FOnActorActorAdded OnActorActorAdded;
+	FOnCharacterAdded OnCharacterActorAdded;
+	FOnActorAdded OnActorActorAdded;
+	FOnPawnAdded OnPawnAdded;
 	
 	template<class TActor = ABaseActor>
 	TActor* SpawnActor(FGameplayTag Tag = FGameplayTag::EmptyTag,
@@ -48,24 +50,33 @@ public:
 		return nullptr;
 	}
 
-	template<class TCharacter = ABaseCharacter>
-	TCharacter* SpawnCharacterActor(FGameplayTag Tag = FGameplayTag::EmptyTag,
-		FVector Location = FVector::ZeroVector,
-		FRotator Rotation = FRotator::ZeroRotator)
+	template<class TActor = ABasePawn>
+	TActor* SpawnPawn(FGameplayTag Tag = FGameplayTag::EmptyTag,
+	FVector Location = FVector::ZeroVector,
+	FRotator Rotation = FRotator::ZeroRotator)
 	{
-		if (auto a = GetGameInstance())
+		if (auto Class = ActorsConfig->ActorsById.Find(Tag))
 		{
-			if (auto b = a->GetSubsystem<UConfigsSubsystem>())
+			if (auto Actor = GetWorld()->SpawnActor<TActor>(*Class, Location, Rotation))
 			{
-				ActorsConfig = b->GetConfig<UActorsConfig>();
+				InitializePawn(Actor);
+				return Actor;
 			}
 		}
 		
+		return nullptr;
+	}
+
+	template<class TCharacter = ABaseCharacter>
+	TCharacter* SpawnCharacter(FGameplayTag Tag = FGameplayTag::EmptyTag,
+		FVector Location = FVector::ZeroVector,
+		FRotator Rotation = FRotator::ZeroRotator)
+	{
 		if (auto Class = ActorsConfig->ActorsById.Find(Tag))
 		{
 			if (auto Actor = GetWorld()->SpawnActor<TCharacter>(*Class, Location, Rotation))
 			{
-				InitializeCharacterActor(Actor);
+				InitializeCharacter(Actor);
 				return Actor;
 			}
 		}
@@ -75,6 +86,7 @@ public:
 
 	virtual void Inject() override;
 	
-	void InitializeCharacterActor(ABaseCharacter* InCharacter);
 	void InitializeActor(ABaseActor* InActor);
+	void InitializePawn(ABasePawn* InPawn);
+	void InitializeCharacter(ABaseCharacter* InCharacter);
 };

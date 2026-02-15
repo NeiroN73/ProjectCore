@@ -33,7 +33,7 @@ void UActorsSubsystem::Initialize()
 	{
 		if (auto CharacterActor = Cast<ABaseCharacter>(Actor))
 		{
-			ActorsFactory->InitializeCharacterActor(CharacterActor);
+			ActorsFactory->InitializeCharacter(CharacterActor);
 		}
 		else if (auto ActorActor = Cast<ABaseActor>(Actor))
 		{

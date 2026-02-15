@@ -7,6 +7,8 @@
 #include "GameFramework/Actor.h"
 #include "BaseActor.generated.h"
 
+class UComponentsContainer;
+
 UCLASS(Abstract)
 class PROJECTCORERUNTIME_API ABaseActor : public AActor
 {
@@ -20,4 +22,11 @@ public:
 	FGameplayTag GetTag();
 	virtual void Construct() {}
 	virtual void Initialize() {}
+
+	UComponentsContainer* GetComponentsContainer();
+	void SetComponentsContainer(UComponentsContainer* InComponentsContainer);
+
+private:
+	UPROPERTY()
+	TObjectPtr<UComponentsContainer> ComponentsContainer;
 };
