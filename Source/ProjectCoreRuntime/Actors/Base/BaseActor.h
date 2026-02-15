@@ -18,4 +18,6 @@ protected:
 
 public:
 	FGameplayTag GetTag();
+	virtual void Construct() {}
+	virtual void Initialize() {}
 };

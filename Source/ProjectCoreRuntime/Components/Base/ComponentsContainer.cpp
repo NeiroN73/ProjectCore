@@ -12,3 +12,20 @@ TArray<UBaseComponent*> UComponentsContainer::GetComponents()
 	}
 	return Result;
 }
+
+void UComponentsContainer::Build()
+{
+	for (auto [Class, Component] : ComponentsByType)
+	{
+		ComponentsFactory->Create(Component, this);
+	}
+}
+
+void UComponentsContainer::Construct()
+{
+	ComponentsFactory = GetWorld()->GetGameInstance()->GetSubsystem<UComponentsFactory>();
+}
+
+void UComponentsContainer::Initialize()
+{
+}

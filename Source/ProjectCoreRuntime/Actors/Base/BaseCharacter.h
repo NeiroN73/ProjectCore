@@ -7,16 +7,25 @@
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
 
+class UComponentsContainer;
+
 UCLASS(Abstract)
 class PROJECTCORERUNTIME_API ABaseCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
-protected:
+public:
+	ABaseCharacter();
+	
+	FGameplayTag GetTag();
+	UComponentsContainer* GetComponentsContainer();
+	void SetComponentsContainer(UComponentsContainer* InComponentsContainer);
+	virtual void Construct() {}
+	virtual void Initialize() {}
+
+private:
 	UPROPERTY(EditAnywhere)
 	FGameplayTag Tag;
-
-	public:
-	FGameplayTag GetTag();
-	ABaseCharacter();
+	UPROPERTY()
+	TObjectPtr<UComponentsContainer> ComponentsContainer;
 };

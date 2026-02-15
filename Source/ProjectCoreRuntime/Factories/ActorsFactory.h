@@ -7,6 +7,8 @@
 #include "ProjectCoreRuntime/Actors/Base/BaseActor.h"
 #include "ProjectCoreRuntime/Actors/Base/BaseCharacter.h"
 #include "ProjectCoreRuntime/Configs/ActorsConfig.h"
+#include "ProjectCoreRuntime/Interfaces/Injectable.h"
+#include "ProjectCoreRuntime/Subsystems/ConfigsSubsystem.h"
 #include "ActorsFactory.generated.h"
 
 class UActorsConfig;
@@ -16,7 +18,8 @@ DECLARE_DELEGATE_OneParam(FOnCharacterActorAdded, ABaseCharacter*)
 DECLARE_DELEGATE_OneParam(FOnActorActorAdded, ABaseActor*)
 
 UCLASS()
-class PROJECTCORERUNTIME_API UActorsFactory : public UBaseFactory
+class PROJECTCORERUNTIME_API UActorsFactory : public UBaseFactory,
+public IInjectable
 {
 	GENERATED_BODY()
 
@@ -50,6 +53,14 @@ public:
 		FVector Location = FVector::ZeroVector,
 		FRotator Rotation = FRotator::ZeroRotator)
 	{
+		if (auto a = GetGameInstance())
+		{
+			if (auto b = a->GetSubsystem<UConfigsSubsystem>())
+			{
+				ActorsConfig = b->GetConfig<UActorsConfig>();
+			}
+		}
+		
 		if (auto Class = ActorsConfig->ActorsById.Find(Tag))
 		{
 			if (auto Actor = GetWorld()->SpawnActor<TCharacter>(*Class, Location, Rotation))
@@ -62,6 +73,8 @@ public:
 		return nullptr;
 	}
 
-	void InitializeCharacterActor(ABaseCharacter* InActor);
+	virtual void Inject() override;
+	
+	void InitializeCharacterActor(ABaseCharacter* InCharacter);
 	void InitializeActor(ABaseActor* InActor);
 };

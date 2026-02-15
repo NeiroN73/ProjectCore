@@ -4,6 +4,7 @@
 #include "LevelsSubsystem.h"
 
 #include "AssetsSubsystem.h"
+#include "ConfigsSubsystem.h"
 #include "Kismet/GameplayStatics.h"
 
 void ULevelsSubsystem::LoadLevelAsync(TSoftObjectPtr<UWorld> Level, FStreamableDelegate Callback)
@@ -22,4 +23,10 @@ void ULevelsSubsystem::LoadLevelAsync(TSoftObjectPtr<UWorld> Level, FStreamableD
 ULevelsConfig* ULevelsSubsystem::GetLevelsConfig()
 {
 	return LevelsConfig.Get();
+}
+
+void ULevelsSubsystem::Inject()
+{
+	LevelsConfig = GetGameInstance()->GetSubsystem<UConfigsSubsystem>()->GetConfig<ULevelsConfig>();
+	AssetsService = GetGameInstance()->GetSubsystem<UAssetsSubsystem>();
 }

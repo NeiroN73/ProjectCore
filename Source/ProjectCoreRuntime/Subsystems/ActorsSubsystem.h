@@ -5,18 +5,18 @@
 #include "CoreMinimal.h"
 #include "ProjectCoreRuntime/Actors/Base/BaseActor.h"
 #include "ProjectCoreRuntime/Factories/ActorsFactory.h"
-#include "ActorsContainerSubsystem.generated.h"
+#include "ActorsSubsystem.generated.h"
 
 class ABaseCharacter;
 
 UCLASS()
-class PROJECTCORERUNTIME_API UActorsContainerSubsystem : public UWorldSubsystem
+class PROJECTCORERUNTIME_API UActorsSubsystem : public UWorldSubsystem,
+public IInjectable,
+public IInitializable
 {
 	GENERATED_BODY()
 
 public:
-	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
-	
 	UPROPERTY()
 	TMap<FGameplayTag, ABaseCharacter*> CharactersById;
 	UPROPERTY()
@@ -48,6 +48,11 @@ private:
 	void AddCharacterActor(ABaseCharacter* CharacterActor);
 	void AddActorActor(ABaseActor* Actor);
 
+public:
+	virtual void Inject() override;
+	virtual void Initialize() override;
+
+private:
 	UPROPERTY()
 	TWeakObjectPtr<UActorsFactory> ActorsFactory;
 };

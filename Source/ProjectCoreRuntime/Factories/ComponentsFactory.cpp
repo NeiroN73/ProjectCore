@@ -2,3 +2,12 @@
 
 
 #include "ComponentsFactory.h"
+
+UBaseComponent* UComponentsFactory::Create(UBaseComponent* NewComponent, UComponentsContainer* InComponentsContainer)
+{
+	NewComponent->Construct();
+	NewComponent->InjectComponentsContainer(InComponentsContainer);
+	NewComponent->Initialize();
+	NewComponent->SetTickEnable(true);
+	return NewComponent;
+}

@@ -3,6 +3,7 @@
 
 #include "HistorySubsystem.h"
 
+#include "ConfigsSubsystem.h"
 #include "PreloadSubsystem.h"
 #include "ProjectCoreRuntime/History/Actions/Base/HistoryAction.h"
 #include "ProjectCoreRuntime/History/Base/Preloadable.h"
@@ -54,4 +55,10 @@ void UHistorySubsystem::OnPreloadsLoaded()
 			Element->Initialize();
 		}
 	}
+}
+
+void UHistorySubsystem::Inject()
+{
+	HistoryConfig = GetGameInstance()->GetSubsystem<UConfigsSubsystem>()->GetConfig<UHistoryConfig>();
+	PreloadsService = GetGameInstance()->GetSubsystem<UPreloadSubsystem>();
 }

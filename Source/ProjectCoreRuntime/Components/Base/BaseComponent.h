@@ -14,5 +14,12 @@ class PROJECTCORERUNTIME_API UBaseComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:
-	virtual void SetComponentsContainer(UComponentsContainer* InComponentsContainer) {}
+	UBaseComponent();
+	virtual void Inject() {}
+	virtual void Initialize() {}
+	virtual void Construct() {}
+	virtual void InjectComponentsContainer(UComponentsContainer* InComponentsContainer) {}
+	
+	virtual void BeginPlay() override;
+	void SetTickEnable(bool bEnable);
 };

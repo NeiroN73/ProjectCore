@@ -5,13 +5,15 @@
 #include "CoreMinimal.h"
 #include "Components/SlateWrapperTypes.h"
 #include "ProjectCoreRuntime/Factories/ScreensFactory.h"
+#include "ProjectCoreRuntime/Interfaces/Injectable.h"
 #include "ProjectCoreRuntime/UI/Base/Screen.h"
 #include "ScreensSubsystem.generated.h"
 
 class UScreensFactory;
 
 UCLASS()
-class PROJECTCORERUNTIME_API UScreensSubsystem : public UGameInstanceSubsystem
+class PROJECTCORERUNTIME_API UScreensSubsystem : public UGameInstanceSubsystem,
+public IInjectable
 {
 	GENERATED_BODY()
 
@@ -31,7 +33,7 @@ public:
 	
 	void Close();
 	
-	virtual void Inject();
+	virtual void Inject() override;
 	
 	template<class TScreen = UScreen>
 	void Open(TSubclassOf<UScreen> InClass = TScreen::StaticClass())

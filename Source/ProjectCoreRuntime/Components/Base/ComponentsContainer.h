@@ -14,22 +14,25 @@ class PROJECTCORERUNTIME_API UComponentsContainer : public UObject
 
 private:
 	UPROPERTY()
+	TWeakObjectPtr<UComponentsFactory> ComponentsFactory;
+	
+	UPROPERTY()
 	TMap<TObjectPtr<UClass>, TObjectPtr<UBaseComponent>> ComponentsByType;
 
 public:
 	template<class TComponent = UBaseComponent>
-	TComponent* TryAddComponent(TComponent* NewComponent)
+	UComponentsContainer* TryAddComponent(TComponent* NewComponent)
 	{
 		auto Class = TComponent::StaticClass();
 		if (ComponentsByType.Add(Class, NewComponent))
 		{
-			return NewComponent;
+			return this;
 		}
 		return nullptr;
 	}
 
 	template<class TComponent = UBaseComponent>
-	TComponent* TryAddComponentWithInterfaces(TComponent* InComponent, TArray<TSubclassOf<UInterface>> BaseInterfaces)
+	UComponentsContainer* TryAddComponentWithInterfaces(TComponent* InComponent, TArray<TSubclassOf<UInterface>> BaseInterfaces)
 	{
 		auto Class = TComponent::StaticClass();
 		TComponent* NewComponent;
@@ -54,7 +57,7 @@ public:
 			}
 		}
 		
-		return NewComponent;
+		return this;
 	}
 
 	template<class TComponent>
@@ -85,4 +88,7 @@ public:
 	}
 
 	TArray<UBaseComponent*> GetComponents();
+	void Build();
+	virtual void Construct();
+	virtual void Initialize();
 };

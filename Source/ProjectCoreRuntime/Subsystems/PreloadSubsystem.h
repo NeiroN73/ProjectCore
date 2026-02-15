@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AssetsSubsystem.h"
+#include "ProjectCoreRuntime/Interfaces/Injectable.h"
 #include "PreloadSubsystem.generated.h"
 
 class UScreensSubsystem;
@@ -16,12 +17,13 @@ class UHistorySaveState;
 DECLARE_DELEGATE(FOnPreloadCompleted)
 
 UCLASS()
-class PROJECTCORERUNTIME_API UPreloadSubsystem : public UGameInstanceSubsystem
+class PROJECTCORERUNTIME_API UPreloadSubsystem : public UGameInstanceSubsystem,
+public IInjectable
 {
 	GENERATED_BODY()
 
 public:
-	virtual void Inject();
+	virtual void Inject() override;
 
 	void StartPreload(TSet<FName> InPreloadIds, FOnPreloadCompleted Callback);
 	void CompletePreload(const FOnPreloadCompleted& Callback);

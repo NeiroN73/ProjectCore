@@ -8,7 +8,7 @@
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "ConfigsSubsystem.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class PROJECTCORERUNTIME_API UConfigsSubsystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
@@ -27,4 +27,6 @@ public:
 		}
 		return nullptr;
 	}
+
+	virtual bool ShouldCreateSubsystem(UObject* Outer) const override;
 };

@@ -1,16 +1,29 @@
 // Copyright Ilya Prokhorov, Inc. All Rights Reserved.
 
 
-#include "ActorsContainerSubsystem.h"
+#include "ActorsSubsystem.h"
 
 #include "Kismet/GameplayStatics.h"
 #include "ProjectCoreRuntime/Factories/ActorsFactory.h"
 
 
-void UActorsContainerSubsystem::Initialize(FSubsystemCollectionBase& Collection)
+void UActorsSubsystem::AddCharacterActor(ABaseCharacter* CharacterActor)
 {
-	Super::Initialize(Collection);
+	CharactersById.Add(CharacterActor->GetTag(), CharacterActor);
+}
 
+void UActorsSubsystem::AddActorActor(ABaseActor* Actor)
+{
+	ActorsById.Add(Actor->GetTag(), Actor);
+}
+
+void UActorsSubsystem::Inject()
+{
+	ActorsFactory = GetWorld()->GetGameInstance()->GetSubsystem<UActorsFactory>();
+}
+
+void UActorsSubsystem::Initialize()
+{
 	CharactersById.Empty();
 	ActorsById.Empty();
 	
@@ -27,14 +40,4 @@ void UActorsContainerSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 			ActorsFactory->InitializeActor(ActorActor);
 		}
 	}
-}
-
-void UActorsContainerSubsystem::AddCharacterActor(ABaseCharacter* CharacterActor)
-{
-	CharactersById.Add(CharacterActor->GetTag(), CharacterActor);
-}
-
-void UActorsContainerSubsystem::AddActorActor(ABaseActor* Actor)
-{
-	ActorsById.Add(Actor->GetTag(), Actor);
 }

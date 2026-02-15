@@ -6,10 +6,20 @@
 
 ABaseCharacter::ABaseCharacter()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 }
 
 FGameplayTag ABaseCharacter::GetTag()
 {
 	return Tag;
+}
+
+UComponentsContainer* ABaseCharacter::GetComponentsContainer()
+{
+	return ComponentsContainer;
+}
+
+void ABaseCharacter::SetComponentsContainer(UComponentsContainer* InComponentsContainer)
+{
+	ComponentsContainer = InComponentsContainer;
 }

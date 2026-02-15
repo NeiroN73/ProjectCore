@@ -6,14 +6,10 @@
 #include "GameFramework/GameModeBase.h"
 #include "InstallerGameMode.generated.h"
 
-class UConfigs;
-
 UCLASS()
 class PROJECTCORERUNTIME_API AInstallerGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
 public:
-	AInstallerGameMode();
-	virtual void Tick(float DeltaSeconds) override;
 };

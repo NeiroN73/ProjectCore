@@ -13,4 +13,4 @@ struct PROJECTCORERUNTIME_API FHandlersTableData : public FTableData
 	
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor> Class;
-};
+}; 
