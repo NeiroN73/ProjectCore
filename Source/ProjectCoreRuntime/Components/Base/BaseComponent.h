@@ -16,6 +16,7 @@ class PROJECTCORERUNTIME_API UBaseComponent : public UActorComponent
 public:
 	UBaseComponent();
 	virtual void Inject() {}
+	virtual void PreInitialize() {}
 	virtual void Initialize() {}
 	virtual void Construct() {}
 	virtual void InjectComponentsContainer(UComponentsContainer* InComponentsContainer) {}

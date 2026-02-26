@@ -7,6 +7,7 @@ UBaseComponent* UComponentsFactory::Create(UBaseComponent* NewComponent, UCompon
 {
 	NewComponent->Construct();
 	NewComponent->InjectComponentsContainer(InComponentsContainer);
+	NewComponent->PreInitialize();
 	NewComponent->Initialize();
 	NewComponent->SetTickEnable(true);
 	return NewComponent;
