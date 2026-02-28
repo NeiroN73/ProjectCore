@@ -13,5 +13,5 @@ class PROJECTCORERUNTIME_API UComponentsFactory : public UBaseFactory
 	GENERATED_BODY()
 
 public:
-	UBaseComponent* Create(UBaseComponent* NewComponent, UComponentsContainer* InComponentsContainer);
+	UActorComponent* Create(UActorComponent* NewComponent, UComponentsContainer* InComponentsContainer);
 };

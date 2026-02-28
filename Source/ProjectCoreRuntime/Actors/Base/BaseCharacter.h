@@ -28,4 +28,6 @@ private:
 	FGameplayTag Tag;
 	UPROPERTY()
 	TObjectPtr<UComponentsContainer> ComponentsContainer;
+
+	void GatherDefaultComponentsInContainer();
 };

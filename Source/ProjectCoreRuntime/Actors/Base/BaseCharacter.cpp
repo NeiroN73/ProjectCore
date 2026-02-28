@@ -3,6 +3,8 @@
 
 #include "BaseCharacter.h"
 
+#include "ProjectCoreRuntime/Components/Base/ComponentsContainer.h"
+
 
 ABaseCharacter::ABaseCharacter()
 {
@@ -22,4 +24,15 @@ UComponentsContainer* ABaseCharacter::GetComponentsContainer()
 void ABaseCharacter::SetComponentsContainer(UComponentsContainer* InComponentsContainer)
 {
 	ComponentsContainer = InComponentsContainer;
+
+	GatherDefaultComponentsInContainer();
+}
+
+void ABaseCharacter::GatherDefaultComponentsInContainer()
+{
+	auto Components = GetComponents();
+	for (UActorComponent* Component : Components)
+	{
+		GetComponentsContainer()->TryAddComponent(Component);
+	}
 }

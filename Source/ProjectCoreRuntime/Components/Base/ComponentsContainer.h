@@ -17,21 +17,20 @@ private:
 	TWeakObjectPtr<UComponentsFactory> ComponentsFactory;
 	
 	UPROPERTY()
-	TMap<TObjectPtr<UClass>, TObjectPtr<UBaseComponent>> ComponentsByType;
+	TMap<TObjectPtr<UClass>, TObjectPtr<UActorComponent>> ComponentsByType;
 
 public:
-	template<class TComponent = UBaseComponent>
+	template<class TComponent = UActorComponent>
 	UComponentsContainer* TryAddComponent(TComponent* NewComponent)
 	{
-		auto Class = TComponent::StaticClass();
-		if (ComponentsByType.Add(Class, NewComponent))
+		if (ComponentsByType.Add(NewComponent->GetClass(), NewComponent))
 		{
 			return this;
 		}
 		return nullptr;
 	}
 
-	template<class TComponent = UBaseComponent>
+	template<class TComponent = UActorComponent>
 	UComponentsContainer* TryAddComponentWithInterfaces(TComponent* InComponent, TArray<TSubclassOf<UInterface>> BaseInterfaces)
 	{
 		auto Class = TComponent::StaticClass();
@@ -74,7 +73,7 @@ public:
 		return nullptr;
 	}
 
-	template<class TComponent = UBaseComponent>
+	template<class TComponent = UActorComponent>
 	TComponent* TryGetComponent(TSubclassOf<TComponent> Class = TComponent::StaticClass())
 	{
 		if (auto Component = ComponentsByType.FindRef(Class))
@@ -87,7 +86,7 @@ public:
 		return nullptr;
 	}
 
-	TArray<UBaseComponent*> GetComponents();
+	TArray<UActorComponent*> GetComponents();
 	void Build();
 	virtual void Construct();
 	virtual void Initialize();

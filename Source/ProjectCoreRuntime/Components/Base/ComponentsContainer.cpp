@@ -3,9 +3,9 @@
 
 #include "ComponentsContainer.h"
 
-TArray<UBaseComponent*> UComponentsContainer::GetComponents()
+TArray<UActorComponent*> UComponentsContainer::GetComponents()
 {
-	TArray<UBaseComponent*> Result;
+	TArray<UActorComponent*> Result;
 	for (auto& [Class, Component] : ComponentsByType)
 	{
 		Result.Add(Component);

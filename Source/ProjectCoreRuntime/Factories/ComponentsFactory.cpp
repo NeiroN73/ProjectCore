@@ -3,12 +3,15 @@
 
 #include "ComponentsFactory.h"
 
-UBaseComponent* UComponentsFactory::Create(UBaseComponent* NewComponent, UComponentsContainer* InComponentsContainer)
+UActorComponent* UComponentsFactory::Create(UActorComponent* NewComponent, UComponentsContainer* InComponentsContainer)
 {
-	NewComponent->Construct();
-	NewComponent->InjectComponentsContainer(InComponentsContainer);
-	NewComponent->PreInitialize();
-	NewComponent->Initialize();
-	NewComponent->SetTickEnable(true);
+	if (auto BaseComponent = Cast<UBaseComponent>(NewComponent))
+	{
+		BaseComponent->Construct();
+		BaseComponent->InjectComponentsContainer(InComponentsContainer);
+		BaseComponent->PreInitialize();
+		BaseComponent->Initialize();
+		BaseComponent->SetTickEnable(true);
+	}
 	return NewComponent;
 }
