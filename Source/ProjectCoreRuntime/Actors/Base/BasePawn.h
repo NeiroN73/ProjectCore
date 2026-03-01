@@ -15,6 +15,7 @@ class PROJECTCORERUNTIME_API ABasePawn : public APawn
 	GENERATED_BODY()
 
 public:
+	ABasePawn();
 	FGameplayTag GetTag();
 	UComponentsContainer* GetComponentsContainer();
 	void SetComponentsContainer(UComponentsContainer* InComponentsContainer);

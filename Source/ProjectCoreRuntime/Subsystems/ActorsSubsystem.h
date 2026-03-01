@@ -11,8 +11,7 @@ class ABaseCharacter;
 
 UCLASS()
 class PROJECTCORERUNTIME_API UActorsSubsystem : public UWorldSubsystem,
-public IInjectable,
-public IInitializable
+public IInjectable
 {
 	GENERATED_BODY()
 
@@ -50,7 +49,6 @@ private:
 
 public:
 	virtual void Inject() override;
-	virtual void Initialize() override;
 
 private:
 	UPROPERTY()

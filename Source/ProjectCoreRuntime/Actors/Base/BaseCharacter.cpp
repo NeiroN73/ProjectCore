@@ -5,7 +5,6 @@
 
 #include "ProjectCoreRuntime/Components/Base/ComponentsContainer.h"
 
-
 ABaseCharacter::ABaseCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -25,11 +24,6 @@ void ABaseCharacter::SetComponentsContainer(UComponentsContainer* InComponentsCo
 {
 	ComponentsContainer = InComponentsContainer;
 
-	GatherDefaultComponentsInContainer();
-}
-
-void ABaseCharacter::GatherDefaultComponentsInContainer()
-{
 	auto Components = GetComponents();
 	for (UActorComponent* Component : Components)
 	{

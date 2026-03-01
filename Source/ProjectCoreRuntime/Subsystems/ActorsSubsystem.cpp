@@ -21,23 +21,3 @@ void UActorsSubsystem::Inject()
 {
 	ActorsFactory = GetWorld()->GetGameInstance()->GetSubsystem<UActorsFactory>();
 }
-
-void UActorsSubsystem::Initialize()
-{
-	CharactersById.Empty();
-	ActorsById.Empty();
-	
-	TArray<AActor*> Actors;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AActor::StaticClass(), Actors);
-	for (AActor* Actor : Actors)
-	{
-		if (auto CharacterActor = Cast<ABaseCharacter>(Actor))
-		{
-			ActorsFactory->InitializeCharacter(CharacterActor);
-		}
-		else if (auto ActorActor = Cast<ABaseActor>(Actor))
-		{
-			ActorsFactory->InitializeActor(ActorActor);
-		}
-	}
-}

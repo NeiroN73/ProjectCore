@@ -17,7 +17,10 @@ void UComponentsContainer::Build()
 {
 	for (auto [Class, Component] : ComponentsByType)
 	{
-		ComponentsFactory->Create(Component, this);
+		if (Component)
+		{
+			ComponentsFactory->Create(Component, this);
+		}
 	}
 }
 
