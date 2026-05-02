@@ -19,7 +19,7 @@ public:
 	
 	FGameplayTag GetTag();
 	UComponentsContainer* GetComponentsContainer();
-	void SetComponentsContainer(UComponentsContainer* InComponentsContainer);
+	void GatherComponents(UComponentsContainer* InComponentsContainer);
 	virtual void Construct() {}
 	virtual void Initialize() {}
 

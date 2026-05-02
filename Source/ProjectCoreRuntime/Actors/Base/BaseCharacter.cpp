@@ -20,7 +20,7 @@ UComponentsContainer* ABaseCharacter::GetComponentsContainer()
 	return ComponentsContainer;
 }
 
-void ABaseCharacter::SetComponentsContainer(UComponentsContainer* InComponentsContainer)
+void ABaseCharacter::GatherComponents(UComponentsContainer* InComponentsContainer)
 {
 	ComponentsContainer = InComponentsContainer;
 

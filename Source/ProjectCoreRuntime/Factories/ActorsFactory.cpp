@@ -13,7 +13,7 @@ void UActorsFactory::InitializeCharacter(ABaseCharacter* InCharacter)
 	NewComponentsContainer->Construct();
 	NewComponentsContainer->Initialize();
 	
-	InCharacter->SetComponentsContainer(NewComponentsContainer);
+	InCharacter->GatherComponents(NewComponentsContainer);
 	InCharacter->Construct();
 	if (auto PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0))
 	{
