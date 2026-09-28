@@ -4,15 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Base/Config.h"
+#include "GameplayTagContainer.h"
 #include "UObject/Object.h"
 #include "LevelsConfig.generated.h"
-
-UENUM()
-enum class ELevelNames : uint8
-{
-	Gameplay  UMETA(DisplayName = "Gameplay Level"),
-	EntryPoint UMETA(DisplayName = "Entry Point")
-};
 
 UCLASS()
 class PROJECTCORERUNTIME_API ULevelsConfig : public UConfig
@@ -21,7 +15,7 @@ class PROJECTCORERUNTIME_API ULevelsConfig : public UConfig
 
 public:
 	UPROPERTY(EditAnywhere)
-	TMap<ELevelNames, TSoftObjectPtr<UWorld>> LevelsByName;
+	TMap<FGameplayTag, TSoftObjectPtr<UWorld>> LevelsByName;
 
-	TSoftObjectPtr<UWorld> GetLevel(ELevelNames InName);
+	TSoftObjectPtr<UWorld> GetLevel(FGameplayTag InName);
 };

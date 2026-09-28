@@ -3,7 +3,7 @@
 
 #include "LevelsConfig.h"
 
-TSoftObjectPtr<UWorld> ULevelsConfig::GetLevel(ELevelNames InName)
+TSoftObjectPtr<UWorld> ULevelsConfig::GetLevel(FGameplayTag InName)
 {
 	return LevelsByName.FindRef(InName);
 }
