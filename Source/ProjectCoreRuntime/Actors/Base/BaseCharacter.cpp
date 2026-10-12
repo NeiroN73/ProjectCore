@@ -5,7 +5,8 @@
 
 #include "ProjectCoreRuntime/Components/Base/ComponentsContainer.h"
 
-ABaseCharacter::ABaseCharacter()
+ABaseCharacter::ABaseCharacter(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer.DoNotCreateDefaultSubobject(ACharacter::MeshComponentName))
 {
 	PrimaryActorTick.bCanEverTick = true;
 }

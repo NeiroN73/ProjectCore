@@ -15,7 +15,7 @@ class PROJECTCORERUNTIME_API ABaseCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	ABaseCharacter();
+	ABaseCharacter(const FObjectInitializer& ObjectInitializer);
 	
 	FGameplayTag GetTag();
 	UComponentsContainer* GetComponentsContainer();
